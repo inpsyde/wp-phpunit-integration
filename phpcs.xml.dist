@@ -4,7 +4,9 @@
   <arg name="colors"/>
   <arg value="sp"/>
   <!-- Recommended Syde PHP Coding Standard rules. -->
-  <rule ref="Syde-Extra"/>
+  <rule ref="Syde-Extra">
+    <exclude name="Syde.Functions.FunctionBodyStart.WrongForMultiLineDeclaration" />
+  </rule>
   <!-- Template-specific rules. -->
   <rule ref="Syde.ControlStructures.DisallowElse">
     <exclude-pattern>*/templates/*</exclude-pattern>
