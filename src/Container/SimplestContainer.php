@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Container;
+namespace Syde\WpPhpunitIntegration\Container;
 
 use InvalidArgumentException;
 use Psr\Container\ContainerInterface;

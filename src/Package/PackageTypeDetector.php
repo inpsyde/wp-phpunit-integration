@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Package;
+namespace Syde\WpPhpunitIntegration\Package;
 
 use Exception;
 

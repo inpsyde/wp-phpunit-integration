@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Task;
+namespace Syde\WpPhpunitIntegration\Task;
 
-use Syde\PocWpLiteIntegrationTestHelper\WpCli;
+use Syde\WpPhpunitIntegration\WpCli;
 
 class DefineRequiredWpConstants implements Task
 {

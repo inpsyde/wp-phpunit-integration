@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Path;
+namespace Syde\WpPhpunitIntegration\Path;
 
 class WpCliPath extends DiscoveredPath
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper;
+namespace Syde\WpPhpunitIntegration;
 
-use Syde\PocWpLiteIntegrationTestHelper\Path\LocalDependencyPath;
+use Syde\WpPhpunitIntegration\Path\LocalDependencyPath;
 
 class WpCli
 {

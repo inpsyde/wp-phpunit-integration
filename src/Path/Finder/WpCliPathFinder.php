@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Path\Finder;
+namespace Syde\WpPhpunitIntegration\Path\Finder;
 
 use Exception;
-use Syde\PocWpLiteIntegrationTestHelper\Path\LocalDependencyPath;
+use Syde\WpPhpunitIntegration\Path\LocalDependencyPath;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 

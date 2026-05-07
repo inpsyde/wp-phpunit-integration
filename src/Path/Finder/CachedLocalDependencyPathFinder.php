@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Path\Finder;
+namespace Syde\WpPhpunitIntegration\Path\Finder;
 
-use Syde\PocWpLiteIntegrationTestHelper\EnvVar;
+use Syde\WpPhpunitIntegration\EnvVar;
 
 class CachedLocalDependencyPathFinder implements LocalDependencyPathFinder
 {

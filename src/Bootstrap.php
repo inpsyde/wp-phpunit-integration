@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper;
+namespace Syde\WpPhpunitIntegration;
 
-use Syde\PocWpLiteIntegrationTestHelper\Container\ServiceLocator;
-use Syde\PocWpLiteIntegrationTestHelper\Container\SimplestContainer;
+use Syde\WpPhpunitIntegration\Container\ServiceLocator;
+use Syde\WpPhpunitIntegration\Container\SimplestContainer;
 
 class Bootstrap
 {

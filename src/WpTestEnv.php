@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper;
+namespace Syde\WpPhpunitIntegration;
 
-use Syde\PocWpLiteIntegrationTestHelper\Container\ServiceLocator;
-use Syde\PocWpLiteIntegrationTestHelper\Task\Bundle\Cleanup;
-use Syde\PocWpLiteIntegrationTestHelper\Task\Bundle\Load;
-use Syde\PocWpLiteIntegrationTestHelper\Task\Bundle\Setup;
+use Syde\WpPhpunitIntegration\Container\ServiceLocator;
+use Syde\WpPhpunitIntegration\Task\Bundle\Cleanup;
+use Syde\WpPhpunitIntegration\Task\Bundle\Load;
+use Syde\WpPhpunitIntegration\Task\Bundle\Setup;
 
 class WpTestEnv
 {

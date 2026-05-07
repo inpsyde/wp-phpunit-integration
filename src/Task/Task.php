@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Task;
+namespace Syde\WpPhpunitIntegration\Task;
 
 interface Task
 {

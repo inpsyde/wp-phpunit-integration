@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper;
+namespace Syde\WpPhpunitIntegration;
 
 class BootstrapLifecycle
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Task\Bundle;
+namespace Syde\WpPhpunitIntegration\Task\Bundle;
 
-use Syde\PocWpLiteIntegrationTestHelper\Task\Task;
+use Syde\WpPhpunitIntegration\Task\Task;
 
 abstract class TaskBundle implements Task
 {
