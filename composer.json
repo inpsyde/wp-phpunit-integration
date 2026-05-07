@@ -27,9 +27,7 @@
         "psr-4": {
             "Syde\\WpPhpunitIntegration\\": "src/"
         },
-        "files": [
-            "inc/bootstrap.php"
-        ]
+        "files": []
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
