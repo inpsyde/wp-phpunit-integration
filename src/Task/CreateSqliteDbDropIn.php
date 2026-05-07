@@ -22,12 +22,7 @@ class CreateSqliteDbDropIn implements Task
         // The SQLite Database Integration comes with a template for the drop-in that's also used "internally" by them.
         // https://github.com/WordPress/sqlite-database-integration/blob/535b42a935a778740387a8223c788f8d6155d5f8/activate.php#L72-L134
         $templateFile = $this->sqliteIntegrationPluginPath->path() . '/db.copy';
-
-        // The Filesystem 6.4 LTS (PHP 8.1) doesn't have the "readFile" method. However, newer versions do.
-        // We should circle back to this and decide on the exact supported versions and improve this.
-        $dbDropInTemplate = method_exists($filesystem, 'readFile')
-            ? $filesystem->readFile($templateFile)
-            : file_get_contents($templateFile);
+        $dbDropInTemplate = $filesystem->readFile($templateFile);
 
         // The SQLite Database Integration assumes a certain location by default, however, there's a chance that the plugin is installed somewhere else.
         // https://github.com/WordPress/sqlite-database-integration/blob/535b42a935a778740387a8223c788f8d6155d5f8/db.copy#L16-L20
