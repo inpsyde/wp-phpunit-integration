@@ -45,6 +45,7 @@ final class EnableWpDebugTest extends UnitTestCase
                             'SAVEQUERIES',
                             'true',
                         ],
+                        default => $this->fail(sprintf('Unexpected call number %d.', $calls)),
                     };
                     $this->assertSame($expects, $args);
                     ++$calls;

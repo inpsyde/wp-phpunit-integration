@@ -42,6 +42,7 @@ final class DefineRequiredWpConstantsTest extends UnitTestCase
                             'true',
                             '--raw',
                         ],
+                        default => $this->fail(sprintf('Unexpected call number %d.', $calls)),
                     };
                     $this->assertSame($expects, $args);
                     ++$calls;
