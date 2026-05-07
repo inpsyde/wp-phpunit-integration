@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Syde\PocWpLiteIntegrationTestHelper\Path\Finder;
+
+use Exception;
+
+interface LocalDependencyPathFinder
+{
+    /**
+     * @throws Exception
+     */
+    public function find(): string;
+}
