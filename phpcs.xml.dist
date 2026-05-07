@@ -7,13 +7,6 @@
   <rule ref="Syde-Extra">
     <exclude name="Syde.Functions.FunctionBodyStart.WrongForMultiLineDeclaration" />
   </rule>
-  <!-- Template-specific rules. -->
-  <rule ref="Syde.ControlStructures.DisallowElse">
-    <exclude-pattern>*/templates/*</exclude-pattern>
-  </rule>
-  <rule ref="Syde-Templates">
-    <include-pattern>*/templates/*</include-pattern>
-  </rule>
   <!-- Do not report on function length for tests. -->
   <rule ref="Syde.Functions.FunctionLength">
     <exclude-pattern>*/tests/*</exclude-pattern>
@@ -31,8 +24,6 @@
   </rule>
   <exclude-pattern>*/vendor/*</exclude-pattern>
   <file>./inc</file>
-  <config name="testVersion" value="8.2-"/>
-  <config name="text_domain" value="wp-phpunit-integration"/>
   <file>./src</file>
   <file>./tests</file>
 </ruleset>
