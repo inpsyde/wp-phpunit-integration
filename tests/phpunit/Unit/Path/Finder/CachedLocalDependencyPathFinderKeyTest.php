@@ -12,9 +12,15 @@ final class CachedLocalDependencyPathFinderKeyTest extends UnitTestCase
 {
     public function testGeneratesExpectedCacheKeyPrefix(): void
     {
+        $cacheKey = (new CachedLocalDependencyPathFinderKey())->generate($this->createStub(LocalDependencyPathFinder::class));
+
         $this->assertStringStartsWith(
-            'WP_LITE_HELPER_CACHED_LOCAL_DEPENDENCY_MOCKOBJECT_LOCALDEPENDENCYPATHFINDER',
-            (new CachedLocalDependencyPathFinderKey())->generate($this->createStub(LocalDependencyPathFinder::class)),
+            'WP_PHPUNIT_INTEGRATION_CACHED_LOCAL_DEPENDENCY_',
+            $cacheKey,
+        );
+        $this->assertStringContainsString(
+            'LOCALDEPENDENCYPATHFINDER',
+            $cacheKey,
         );
     }
 }

@@ -45,7 +45,7 @@ final class TestRunnerProcessTrackerTest extends UnitTestCase
         $envVar
             ->expects($this->once())
             ->method('set')->with(
-                'WP_LITE_INTEGRATION_TEST_HELPER_MAIN_PROCESS_ID',
+                'WP_PHPUNIT_INTEGRATION_MAIN_PROCESS_ID',
                 '123456',
             );
 
@@ -121,7 +121,9 @@ final class TestRunnerProcessTrackerTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->onlyMethods(['isCurrentProcessMainProcess'])
             ->getMock();
-        $testRunnerProcessTracker->method('isCurrentProcessMainProcess')
+        $testRunnerProcessTracker
+            ->expects($this->once())
+            ->method('isCurrentProcessMainProcess')
             ->willReturn(true);
 
         $this->assertFalse($testRunnerProcessTracker->isCurrentProcessChildProcess());
