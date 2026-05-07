@@ -1,0 +1,21 @@
+{
+    "name": "wp-phpunit-integration",
+    "description": "Sets up and includes a full WordPress environment for functional and integration tests",
+    "license": "MIT",
+    "version": "1.0.0",
+    "author": {
+        "name": "Syde GmbH",
+        "email": "hello@syde.com",
+        "url": "https://syde.com/"
+    },
+    "engines": {
+        "node": "~22.0"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "^30.0.0"
+    },
+    "scripts": {
+        "lint:md": "wp-scripts lint-md-docs README.md docs/**/*.md",
+        "lint:md:fix": "wp-scripts lint-md-docs README.md docs/**/*.md -- --fix"
+    }
+}

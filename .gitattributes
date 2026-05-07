@@ -1,0 +1,52 @@
+# Build & Assets
+/webpack.config.js export-ignore
+/resources/ export-ignore
+/assets/* linguist-generated
+/tsconfig.json export-ignore
+/release.config.js export-ignore
+
+# Core Files & Configuration
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/CHANGELOG.md export-ignore
+/README.md export-ignore
+
+# Code Style
+/phpcs.xml* export-ignore
+/phpstan.neon* export-ignore
+
+# Documentation
+/docs/ export-ignore
+
+# Others
+* text eol=lf
+*.php diff=php
+*.crt text
+*.key text
+*.zip binary
+*.mo binary
+*.png binary
+*.jpg binary
+*.eot binary
+*.ttf binary
+*.woff2 binary
+*.woff binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.flv binary
+*.fla binary
+*.swf binary
+*.gz binary
+*.7z binary
+
+# Package Management
+/composer.lock linguist-generated
+/.eslintrc.js export-ignore
+
+# Testing
+/tests/ export-ignore
+/phpunit.xml* export-ignore
+/jest.config.js export-ignore

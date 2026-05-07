@@ -1,0 +1,27 @@
+# Code Style & Testing
+/phpcs.xml
+/phpunit.xml
+
+# Environment & Configuration
+/.env*
+/auth.json
+
+# IDE & System Files
+/.DS_Store
+/.idea/
+
+# Logs & Cache
+*.log
+/.phpunit.cache/
+/.phpunit.result.cache
+
+# Package Management
+/node_modules/
+/vendor/
+/vendor
+npm-debug.log*
+
+# Temporary Files & Directories
+/temp/
+/assets/
+typings/

@@ -1,0 +1,50 @@
+{
+    "schemaVersion": "1.0",
+    "projectName": "WP PHPUnit Integration",
+    "packageType": "phplibrary",
+    "features": [
+        "setup-git",
+        "license",
+        "setup-php",
+        "setup-node",
+        "dependabot",
+        "php-unit-testing"
+    ],
+    "settings": {
+        "package": {
+            "year": "2026",
+            "type": "phplibrary",
+            "name": "WP PHPUnit Integration",
+            "vendor": "Syde",
+            "client": "",
+            "description": "Sets up and includes a full WordPress environment for functional and integration tests",
+            "version": "1.0.0",
+            "projectSlug": "wp-phpunit-integration",
+            "vendorSlug": "syde",
+            "clientSlug": ""
+        },
+        "setup-git": {
+            "codeOwners": "@inpsyde\/platform-engineering"
+        },
+        "license": {
+            "type": "MIT",
+            "licenseFullName": "MIT",
+            "copyrightAndLicenseText": "This package is [open-source software](https:\/\/opensource.org\/license\/MIT) distributed under\nthe terms of the MIT License. For the full license, see [LICENSE](.\/LICENSE)."
+        },
+        "setup-php": {
+            "phpVersion": "8.2",
+            "privatePackagist": true,
+            "composerName": "syde\/wp-phpunit-integration",
+            "composerType": "library",
+            "composerNamespace": "Syde\\\\WpPhpunitIntegration",
+            "phpNamespace": "Syde\\WpPhpunitIntegration",
+            "phpVersionMatrix": [
+                "8.2",
+                "8.3",
+                "8.4",
+                "8.5"
+            ],
+            "installationCommand": "composer require syde\/wp-phpunit-integration"
+        }
+    }
+}

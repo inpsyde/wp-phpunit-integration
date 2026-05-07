@@ -1,0 +1,70 @@
+{
+    "name": "syde/wp-phpunit-integration",
+    "description": "Sets up and includes a full WordPress environment for functional and integration tests",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Syde GmbH",
+            "email": "hello@syde.com",
+            "homepage": "https://syde.com/",
+            "role": "Company"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "inpsyde/modularity": "^1.7"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "inpsyde/*": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Syde\\WpPhpunitIntegration\\": "src/"
+        },
+        "files": [
+            "inc/bootstrap.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload-dev": {
+        "psr-4": {
+            "Syde\\WpPhpunitIntegration\\Tests\\": [
+                "tests/phpunit/",
+                "tests/phpunit/src"
+            ]
+        }
+    },
+    "scripts": {
+        "phpcs": "@php ./vendor/bin/phpcs",
+        "phpcs:fix": "@php ./vendor/bin/phpcbf",
+        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G",
+        "tests": "@php ./vendor/bin/phpunit --coverage-text",
+        "tests:no-cov": "@php ./vendor/bin/phpunit --no-coverage"
+    },
+    "require-dev": {
+        "syde/phpcs": "^1.0",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "inpsyde/wp-stubs-versions": "dev-latest",
+        "swissspidy/phpstan-no-private": "^1.0",
+        "phpunit/phpunit": "^11",
+        "brain/monkey": "^2.6",
+        "phpstan/phpstan-mockery": "^2.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.packagist.com/inpsyde/"
+        },
+        {
+            "packagist.org": false
+        }
+    ]
+}

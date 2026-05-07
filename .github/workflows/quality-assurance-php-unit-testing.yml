@@ -1,0 +1,22 @@
+name: 'PHP Unit Testing'
+on:
+  pull_request:
+    paths:
+      - '**.php'
+      - 'composer.*'
+      - 'phpunit.*'
+jobs:
+  tests-unit-php:
+    uses: inpsyde/reusable-workflows/.github/workflows/tests-unit-php.yml@main
+    secrets:
+      COMPOSER_AUTH_JSON: '${{secrets.PACKAGIST_AUTH_JSON}}'
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - '8.2'
+          - '8.3'
+          - '8.4'
+          - '8.5'
+    with:
+      PHP_VERSION: '${{ matrix.php }}'

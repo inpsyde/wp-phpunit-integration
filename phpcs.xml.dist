@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<ruleset>
+  <!-- Use colors, and show sniff error codes and progress. -->
+  <arg name="colors"/>
+  <arg value="sp"/>
+  <!-- Recommended Syde PHP Coding Standard rules. -->
+  <rule ref="Syde-Extra"/>
+  <!-- Template-specific rules. -->
+  <rule ref="Syde.ControlStructures.DisallowElse">
+    <exclude-pattern>*/templates/*</exclude-pattern>
+  </rule>
+  <rule ref="Syde-Templates">
+    <include-pattern>*/templates/*</include-pattern>
+  </rule>
+  <!-- Do not report on function length for tests. -->
+  <rule ref="Syde.Functions.FunctionLength">
+    <exclude-pattern>*/tests/*</exclude-pattern>
+  </rule>
+  <!-- PSR-4 namespace configuration. -->
+  <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+    <properties>
+      <property name="rootNamespaces" type="array">
+        <element key="src" value="Syde\WpPhpunitIntegration"/>
+        <element key="tests/phpunit/src" value="Syde\WpPhpunitIntegration\Tests"/>
+        <element key="tests/phpunit/Unit" value="Syde\WpPhpunitIntegration\Tests\Unit"/>
+        <element key="tests/phpunit/Functional" value="Syde\WpPhpunitIntegration\Tests\Functional"/>
+      </property>
+    </properties>
+  </rule>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <file>./inc</file>
+  <config name="testVersion" value="8.2-"/>
+  <config name="text_domain" value="wp-phpunit-integration"/>
+  <file>./src</file>
+  <file>./tests</file>
+</ruleset>
