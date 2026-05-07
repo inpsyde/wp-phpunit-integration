@@ -13,48 +13,22 @@
     ],
     "require": {
         "php": ">=8.2",
-        "inpsyde/modularity": "^1.7"
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "sort-packages": true,
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "inpsyde/*": true
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "Syde\\WpPhpunitIntegration\\": "src/"
-        },
-        "files": []
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "autoload-dev": {
-        "psr-4": {
-            "Syde\\WpPhpunitIntegration\\Tests\\": [
-                "tests/phpunit/",
-                "tests/phpunit/src"
-            ]
-        }
-    },
-    "scripts": {
-        "phpcs": "@php ./vendor/bin/phpcs",
-        "phpcs:fix": "@php ./vendor/bin/phpcbf",
-        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G",
-        "tests": "@php ./vendor/bin/phpunit --coverage-text",
-        "tests:no-cov": "@php ./vendor/bin/phpunit --no-coverage"
+        "johnpbloch/wp-cli-phar": "^2.12",
+        "psr/container": "^2.0",
+        "symfony/filesystem": "^7.4",
+        "symfony/finder": "^7.4",
+        "symfony/process": "^7.4",
+        "wecodemore/wordpress-early-hook": "^1.4",
+        "wpackagist-plugin/sqlite-database-integration": "^2.2"
     },
     "require-dev": {
-        "syde/phpcs": "^1.0",
+        "ergebnis/composer-normalize": "^2.51",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "inpsyde/wp-stubs-versions": "dev-latest",
-        "swissspidy/phpstan-no-private": "^1.0",
         "phpunit/phpunit": "^11",
-        "brain/monkey": "^2.6",
-        "phpstan/phpstan-mockery": "^2.0"
+        "rector/rector": "^2.4",
+        "swissspidy/phpstan-no-private": "^1.0",
+        "syde/phpcs": "^1.0"
     },
     "repositories": [
         {
@@ -64,5 +38,37 @@
         {
             "packagist.org": false
         }
-    ]
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Syde\\WpPhpunitIntegration\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Syde\\WpPhpunitIntegration\\Tests\\": [
+                "tests/phpunit/",
+                "tests/phpunit/src"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "inpsyde/*": true
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "phpcs": "@php ./vendor/bin/phpcs",
+        "phpcs:fix": "@php ./vendor/bin/phpcbf",
+        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G",
+        "tests": "@php ./vendor/bin/phpunit --coverage-text",
+        "tests:no-cov": "@php ./vendor/bin/phpunit --no-coverage"
+    }
 }
