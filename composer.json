@@ -67,6 +67,14 @@
         "optimize-autoloader": true,
         "sort-packages": true
     },
+    "extra": {
+        "installer-paths": {
+            "vendor/wordpress/wordpress/wp-content/plugins/{$name}": [
+                "type:wordpress-plugin"
+            ]
+        },
+        "wordpress-install-dir": "vendor/wordpress/wordpress"
+    },
     "scripts": {
         "phpcs": "@php ./vendor/bin/phpcs",
         "phpcs:fix": "@php ./vendor/bin/phpcbf",
