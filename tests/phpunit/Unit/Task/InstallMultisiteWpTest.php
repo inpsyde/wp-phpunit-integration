@@ -21,7 +21,7 @@ final class InstallMultisiteWpTest extends UnitTestCase
                     'core',
                     'multisite-install',
                     '--url=localhost:8889',
-                    '--title=WordPress',
+                    '--title=WordPress Test Environment',
                     '--admin_user=admin',
                     '--admin_password=password',
                     '--admin_email=admin@wordpress.localhost',
