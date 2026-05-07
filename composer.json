@@ -30,6 +30,9 @@
         "swissspidy/phpstan-no-private": "^1.0",
         "syde/phpcs": "^1.0"
     },
+    "suggest": {
+        "roots/wordpress": "Recommended package for installing WordPress core via Composer"
+    },
     "repositories": [
         {
             "type": "composer",
