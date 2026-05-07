@@ -24,7 +24,7 @@ class BuiltInServer
         self::$process = $this->symfonyProcessFactory->create([
             'php',
             '-S',
-            '0.0.0.0:8889',
+            '0.0.0.0:19254',
             '-t',
             $this->wordPressPath->path(),
         ]);
