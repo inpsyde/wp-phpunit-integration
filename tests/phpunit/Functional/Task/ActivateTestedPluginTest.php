@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Functional\Task;
+namespace Syde\WpPhpunitIntegration\Tests\Functional\Task;
 
-use Syde\PocWpLiteIntegrationTestHelper\Task\ActivateTestedPlugin;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\FunctionalTestCase;
-use Syde\PocWpLiteIntegrationTestHelper\WpCli;
+use Syde\WpPhpunitIntegration\Task\ActivateTestedPlugin;
+use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
+use Syde\WpPhpunitIntegration\WpCli;
 
 final class ActivateTestedPluginTest extends FunctionalTestCase
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Unit\Package;
+namespace Syde\WpPhpunitIntegration\Tests\Unit\Package;
 
-use Syde\PocWpLiteIntegrationTestHelper\Package\PackageComposerJsonReader;
-use Syde\PocWpLiteIntegrationTestHelper\Package\PackageType;
-use Syde\PocWpLiteIntegrationTestHelper\Package\PackageTypeDetector;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\UnitTestCase;
+use Syde\WpPhpunitIntegration\Package\PackageComposerJsonReader;
+use Syde\WpPhpunitIntegration\Package\PackageType;
+use Syde\WpPhpunitIntegration\Package\PackageTypeDetector;
+use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
 
 final class PackageTypeDetectorTest extends UnitTestCase
 {

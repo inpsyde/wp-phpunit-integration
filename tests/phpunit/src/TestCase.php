@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests;
+namespace Syde\WpPhpunitIntegration\Tests;
 
-use Syde\PocWpLiteIntegrationTestHelper\Path\LocalDependencyPath;
+use Syde\WpPhpunitIntegration\Path\LocalDependencyPath;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {

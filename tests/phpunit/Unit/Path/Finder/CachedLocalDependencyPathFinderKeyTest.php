@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Unit\Path\Finder;
+namespace Syde\WpPhpunitIntegration\Tests\Unit\Path\Finder;
 
-use Syde\PocWpLiteIntegrationTestHelper\Path\Finder\CachedLocalDependencyPathFinderKey;
-use Syde\PocWpLiteIntegrationTestHelper\Path\Finder\LocalDependencyPathFinder;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\UnitTestCase;
+use Syde\WpPhpunitIntegration\Path\Finder\CachedLocalDependencyPathFinderKey;
+use Syde\WpPhpunitIntegration\Path\Finder\LocalDependencyPathFinder;
+use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
 
 final class CachedLocalDependencyPathFinderKeyTest extends UnitTestCase
 {

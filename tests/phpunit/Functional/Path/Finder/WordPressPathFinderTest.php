@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Functional\Path\Finder;
+namespace Syde\WpPhpunitIntegration\Tests\Functional\Path\Finder;
 
-use Syde\PocWpLiteIntegrationTestHelper\Path\Finder\WordPressPathFinder;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\FunctionalTestCase;
+use Syde\WpPhpunitIntegration\Path\Finder\WordPressPathFinder;
+use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
 
 final class WordPressPathFinderTest extends FunctionalTestCase
 {

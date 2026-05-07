@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Unit;
+namespace Syde\WpPhpunitIntegration\Tests\Unit;
 
-use Syde\PocWpLiteIntegrationTestHelper\BootstrapLifecycle;
-use Syde\PocWpLiteIntegrationTestHelper\BootstrapRunner;
-use Syde\PocWpLiteIntegrationTestHelper\ShutdownFunctionRegisterer;
-use Syde\PocWpLiteIntegrationTestHelper\TestRunnerProcessTracker;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\UnitTestCase;
+use Syde\WpPhpunitIntegration\BootstrapLifecycle;
+use Syde\WpPhpunitIntegration\BootstrapRunner;
+use Syde\WpPhpunitIntegration\ShutdownFunctionRegisterer;
+use Syde\WpPhpunitIntegration\TestRunnerProcessTracker;
+use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
 
 final class BootstrapRunnerTest extends UnitTestCase
 {

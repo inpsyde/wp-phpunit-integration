@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Unit\Task\Bundle;
+namespace Syde\WpPhpunitIntegration\Tests\Unit\Task\Bundle;
 
-use Syde\PocWpLiteIntegrationTestHelper\Task\Bundle\TaskBundle;
-use Syde\PocWpLiteIntegrationTestHelper\Task\Task;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\UnitTestCase;
+use Syde\WpPhpunitIntegration\Task\Bundle\TaskBundle;
+use Syde\WpPhpunitIntegration\Task\Task;
+use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
 
 final class TaskBundleTest extends UnitTestCase
 {

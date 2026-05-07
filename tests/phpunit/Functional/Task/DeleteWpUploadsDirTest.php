@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Functional\Task;
+namespace Syde\WpPhpunitIntegration\Tests\Functional\Task;
 
-use Syde\PocWpLiteIntegrationTestHelper\Task\DeleteWpUploadsDir;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\FunctionalTestCase;
+use Syde\WpPhpunitIntegration\Task\DeleteWpUploadsDir;
+use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
 
 final class DeleteWpUploadsDirTest extends FunctionalTestCase
 {

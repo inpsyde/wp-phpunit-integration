@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Functional\Path;
+namespace Syde\WpPhpunitIntegration\Tests\Functional\Path;
 
-use Syde\PocWpLiteIntegrationTestHelper\Path\LocalDependencyPathNormalizer;
-use Syde\PocWpLiteIntegrationTestHelper\Path\PackageRootPath;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\FunctionalTestCase;
+use Syde\WpPhpunitIntegration\Path\LocalDependencyPathNormalizer;
+use Syde\WpPhpunitIntegration\Path\PackageRootPath;
+use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
 
 final class PackageRootPathTest extends FunctionalTestCase
 {

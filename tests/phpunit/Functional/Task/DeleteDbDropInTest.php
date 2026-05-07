@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Functional\Task;
+namespace Syde\WpPhpunitIntegration\Tests\Functional\Task;
 
-use Syde\PocWpLiteIntegrationTestHelper\Task\DeleteDbDropIn;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\FunctionalTestCase;
+use Syde\WpPhpunitIntegration\Task\DeleteDbDropIn;
+use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
 
 final class DeleteDbDropInTest extends FunctionalTestCase
 {

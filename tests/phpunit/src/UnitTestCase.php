@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests;
+namespace Syde\WpPhpunitIntegration\Tests;
 
 class UnitTestCase extends TestCase
 {

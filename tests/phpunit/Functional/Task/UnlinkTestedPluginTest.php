@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Functional\Task;
+namespace Syde\WpPhpunitIntegration\Tests\Functional\Task;
 
-use Syde\PocWpLiteIntegrationTestHelper\Task\UnlinkTestedPlugin;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\FunctionalTestCase;
+use Syde\WpPhpunitIntegration\Task\UnlinkTestedPlugin;
+use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
 
 final class UnlinkTestedPluginTest extends FunctionalTestCase
 {

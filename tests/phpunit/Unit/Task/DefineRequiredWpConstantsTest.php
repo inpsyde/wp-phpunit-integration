@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Syde\PocWpLiteIntegrationTestHelper\Tests\Unit\Task;
+namespace Syde\WpPhpunitIntegration\Tests\Unit\Task;
 
-use Syde\PocWpLiteIntegrationTestHelper\Task\DefineRequiredWpConstants;
-use Syde\PocWpLiteIntegrationTestHelper\Tests\UnitTestCase;
-use Syde\PocWpLiteIntegrationTestHelper\WpCli;
+use Syde\WpPhpunitIntegration\Task\DefineRequiredWpConstants;
+use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
+use Syde\WpPhpunitIntegration\WpCli;
 
 final class DefineRequiredWpConstantsTest extends UnitTestCase
 {
