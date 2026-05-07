@@ -79,6 +79,8 @@
         "phpcs": "@php ./vendor/bin/phpcs",
         "phpcs:fix": "@php ./vendor/bin/phpcbf",
         "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G",
+        "rector": "@php ./vendor/bin/rector process --dry-run",
+        "rector:fix": "@php ./vendor/bin/rector process",
         "tests": "@php ./vendor/bin/phpunit --coverage-text",
         "tests:no-cov": "@php ./vendor/bin/phpunit --no-coverage"
     }
