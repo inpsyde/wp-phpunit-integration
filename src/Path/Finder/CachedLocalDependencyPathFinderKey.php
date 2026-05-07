@@ -8,7 +8,7 @@ use ReflectionClass;
 
 class CachedLocalDependencyPathFinderKey
 {
-    private const ENV_PREFIX = 'WP_LITE_HELPER_CACHED_LOCAL_DEPENDENCY_';
+    private const ENV_PREFIX = 'WP_PHPUNIT_INTEGRATION_CACHED_LOCAL_DEPENDENCY_';
 
     public function generate(LocalDependencyPathFinder $localDependencyPathFinder): string
     {

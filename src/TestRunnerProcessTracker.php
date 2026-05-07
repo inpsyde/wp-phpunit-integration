@@ -8,7 +8,7 @@ use Exception;
 
 class TestRunnerProcessTracker
 {
-    private const MAIN_PROCESS_ID = 'WP_LITE_INTEGRATION_TEST_HELPER_MAIN_PROCESS_ID';
+    private const MAIN_PROCESS_ID = 'WP_PHPUNIT_INTEGRATION_MAIN_PROCESS_ID';
 
     public function __construct(
         private readonly PhpProcessIdProvider $phpProcessIdProvider,
