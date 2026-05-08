@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Functional\Task;
+namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
-use Syde\WpPhpunitIntegration\Task\UnlinkTestedTheme;
-use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
+use Syde\WpPhpUnitIntegration\Task\UnlinkTestedTheme;
+use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
 final class UnlinkTestedThemeTest extends FunctionalTestCase
 {

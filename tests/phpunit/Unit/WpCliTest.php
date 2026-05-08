@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Unit;
+namespace Syde\WpPhpUnitIntegration\Tests\Unit;
 
-use Syde\WpPhpunitIntegration\SymfonyProcessFactory;
-use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
-use Syde\WpPhpunitIntegration\WpCli;
+use Syde\WpPhpUnitIntegration\SymfonyProcessFactory;
+use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
+use Syde\WpPhpUnitIntegration\WpCli;
 use Symfony\Component\Process\Process;
 
 final class WpCliTest extends UnitTestCase

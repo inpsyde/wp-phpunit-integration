@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Path;
+namespace Syde\WpPhpUnitIntegration\Path;
 
 use Exception;
 use Symfony\Component\Filesystem\Filesystem;

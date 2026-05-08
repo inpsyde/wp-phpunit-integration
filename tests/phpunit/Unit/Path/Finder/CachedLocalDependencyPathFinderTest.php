@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Unit\Path\Finder;
+namespace Syde\WpPhpUnitIntegration\Tests\Unit\Path\Finder;
 
-use Syde\WpPhpunitIntegration\EnvVar;
-use Syde\WpPhpunitIntegration\Path\Finder\CachedLocalDependencyPathFinder;
-use Syde\WpPhpunitIntegration\Path\Finder\CachedLocalDependencyPathFinderKey;
-use Syde\WpPhpunitIntegration\Path\Finder\LocalDependencyPathFinder;
-use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
+use Syde\WpPhpUnitIntegration\EnvVar;
+use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinder;
+use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinderKey;
+use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
+use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
 
 final class CachedLocalDependencyPathFinderTest extends UnitTestCase
 {

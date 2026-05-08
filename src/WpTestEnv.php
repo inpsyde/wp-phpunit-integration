@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration;
+namespace Syde\WpPhpUnitIntegration;
 
-use Syde\WpPhpunitIntegration\Container\ServiceLocator;
-use Syde\WpPhpunitIntegration\Task\Bundle\Cleanup;
-use Syde\WpPhpunitIntegration\Task\Bundle\Load;
-use Syde\WpPhpunitIntegration\Task\Bundle\Setup;
+use Syde\WpPhpUnitIntegration\Container\ServiceLocator;
+use Syde\WpPhpUnitIntegration\Task\Bundle\Cleanup;
+use Syde\WpPhpUnitIntegration\Task\Bundle\Load;
+use Syde\WpPhpUnitIntegration\Task\Bundle\Setup;
 
 class WpTestEnv
 {

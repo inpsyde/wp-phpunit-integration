@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Path\Finder;
+namespace Syde\WpPhpUnitIntegration\Path\Finder;
 
 use Exception;
 

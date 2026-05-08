@@ -46,12 +46,12 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Syde\\WpPhpunitIntegration\\": "src/"
+            "Syde\\WpPhpUnitIntegration\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Syde\\WpPhpunitIntegration\\Tests\\": [
+            "Syde\\WpPhpUnitIntegration\\Tests\\": [
                 "tests/phpunit/",
                 "tests/phpunit/src"
             ]

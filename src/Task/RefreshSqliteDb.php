@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Task;
+namespace Syde\WpPhpUnitIntegration\Task;
 
-use Syde\WpPhpunitIntegration\Path\LocalDependencyPath;
-use Syde\WpPhpunitIntegration\PhpProcessIdProvider;
-use Syde\WpPhpunitIntegration\WpCli;
+use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\PhpProcessIdProvider;
+use Syde\WpPhpUnitIntegration\WpCli;
 use Symfony\Component\Filesystem\Filesystem;
 
 class RefreshSqliteDb implements Task

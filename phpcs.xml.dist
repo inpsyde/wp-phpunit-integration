@@ -15,10 +15,10 @@
   <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
     <properties>
       <property name="rootNamespaces" type="array">
-        <element key="src" value="Syde\WpPhpunitIntegration"/>
-        <element key="tests/phpunit/src" value="Syde\WpPhpunitIntegration\Tests"/>
-        <element key="tests/phpunit/Unit" value="Syde\WpPhpunitIntegration\Tests\Unit"/>
-        <element key="tests/phpunit/Functional" value="Syde\WpPhpunitIntegration\Tests\Functional"/>
+        <element key="src" value="Syde\WpPhpUnitIntegration"/>
+        <element key="tests/phpunit/src" value="Syde\WpPhpUnitIntegration\Tests"/>
+        <element key="tests/phpunit/Unit" value="Syde\WpPhpUnitIntegration\Tests\Unit"/>
+        <element key="tests/phpunit/Functional" value="Syde\WpPhpUnitIntegration\Tests\Functional"/>
       </property>
     </properties>
   </rule>

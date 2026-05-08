@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Functional\Task;
+namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
-use Syde\WpPhpunitIntegration\PhpProcessIdProvider;
-use Syde\WpPhpunitIntegration\Task\RefreshSqliteDb;
-use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
-use Syde\WpPhpunitIntegration\WpCli;
+use Syde\WpPhpUnitIntegration\PhpProcessIdProvider;
+use Syde\WpPhpUnitIntegration\Task\RefreshSqliteDb;
+use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
+use Syde\WpPhpUnitIntegration\WpCli;
 
 final class RefreshSqliteDbTest extends FunctionalTestCase
 {

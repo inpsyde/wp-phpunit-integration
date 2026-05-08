@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests;
+namespace Syde\WpPhpUnitIntegration\Tests;
 
 use ReflectionClass;
 use Symfony\Component\Filesystem\Filesystem;

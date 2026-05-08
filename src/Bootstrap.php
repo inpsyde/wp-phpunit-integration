@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration;
+namespace Syde\WpPhpUnitIntegration;
 
-use Syde\WpPhpunitIntegration\Container\ServiceLocator;
-use Syde\WpPhpunitIntegration\Container\SimplestContainer;
+use Syde\WpPhpUnitIntegration\Container\ServiceLocator;
+use Syde\WpPhpUnitIntegration\Container\SimplestContainer;
 
 class Bootstrap
 {

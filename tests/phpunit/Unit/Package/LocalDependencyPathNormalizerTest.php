@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Unit\Package;
+namespace Syde\WpPhpUnitIntegration\Tests\Unit\Package;
 
-use Syde\WpPhpunitIntegration\Path\LocalDependencyPathNormalizer;
-use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
+use Syde\WpPhpUnitIntegration\Path\LocalDependencyPathNormalizer;
+use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
 
 final class LocalDependencyPathNormalizerTest extends UnitTestCase
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Functional\Package;
+namespace Syde\WpPhpUnitIntegration\Tests\Functional\Package;
 
-use Syde\WpPhpunitIntegration\Package\PackageComposerJsonReader;
-use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
+use Syde\WpPhpUnitIntegration\Package\PackageComposerJsonReader;
+use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
 final class PackageComposerJsonReaderTest extends FunctionalTestCase
 {

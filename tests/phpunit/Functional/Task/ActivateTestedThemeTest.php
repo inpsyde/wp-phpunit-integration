@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Functional\Task;
+namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
-use Syde\WpPhpunitIntegration\Task\ActivateTestedTheme;
-use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
-use Syde\WpPhpunitIntegration\WpCli;
+use Syde\WpPhpUnitIntegration\Task\ActivateTestedTheme;
+use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
+use Syde\WpPhpUnitIntegration\WpCli;
 
 final class ActivateTestedThemeTest extends FunctionalTestCase
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Functional\Task;
+namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
-use Syde\WpPhpunitIntegration\Task\DeleteSqliteDatabaseDir;
-use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
+use Syde\WpPhpUnitIntegration\Task\DeleteSqliteDatabaseDir;
+use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
 final class DeleteSqliteDatabaseDirTest extends FunctionalTestCase
 {

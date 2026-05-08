@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Task;
+namespace Syde\WpPhpUnitIntegration\Task;
 
-use Syde\WpPhpunitIntegration\WpCli;
+use Syde\WpPhpUnitIntegration\WpCli;
 
 class InstallMultisiteWp implements Task
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Task\Bundle;
+namespace Syde\WpPhpUnitIntegration\Task\Bundle;
 
-use Syde\WpPhpunitIntegration\Task\Task;
+use Syde\WpPhpUnitIntegration\Task\Task;
 
 abstract class TaskBundle implements Task
 {

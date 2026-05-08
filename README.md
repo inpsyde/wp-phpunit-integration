@@ -58,7 +58,7 @@ Create a `/tests/phpunit/bootstrap-integration.php` file with the following cont
 
 declare(strict_types=1);
 
-use Syde\WpPHPUnitIntegration\Bootstrap;
+use Syde\WpPhpUnitIntegration\Bootstrap;
 
 $packagePath = dirname(__DIR__, 2);
 $vendorPath = "{$packagePath}/vendor";
@@ -128,9 +128,9 @@ The `load` phase is called before both the main test process and any child proce
 Each phase can be customized by running additional logic before or after the defaults, or by replacing it entirely.
 
 ```php
-use Syde\WpPHPUnitIntegration\Bootstrap;
-use Syde\WpPHPUnitIntegration\BootstrapLifecycle;
-use Syde\WpPHPUnitIntegration\WpTestEnv;
+use Syde\WpPhpUnitIntegration\Bootstrap;
+use Syde\WpPhpUnitIntegration\BootstrapLifecycle;
+use Syde\WpPhpUnitIntegration\WpTestEnv;
 
 Bootstrap::init(
     $packagePath,

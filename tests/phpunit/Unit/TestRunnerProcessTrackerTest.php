@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Unit;
+namespace Syde\WpPhpUnitIntegration\Tests\Unit;
 
-use Syde\WpPhpunitIntegration\EnvVar;
-use Syde\WpPhpunitIntegration\PhpProcessIdProvider;
-use Syde\WpPhpunitIntegration\TestRunnerProcessTracker;
-use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
+use Syde\WpPhpUnitIntegration\EnvVar;
+use Syde\WpPhpUnitIntegration\PhpProcessIdProvider;
+use Syde\WpPhpUnitIntegration\TestRunnerProcessTracker;
+use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
 
 final class TestRunnerProcessTrackerTest extends UnitTestCase
 {

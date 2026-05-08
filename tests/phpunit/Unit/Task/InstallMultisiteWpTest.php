@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Unit\Task;
+namespace Syde\WpPhpUnitIntegration\Tests\Unit\Task;
 
-use Syde\WpPhpunitIntegration\Task\InstallMultisiteWp;
-use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
-use Syde\WpPhpunitIntegration\WpCli;
+use Syde\WpPhpUnitIntegration\Task\InstallMultisiteWp;
+use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
+use Syde\WpPhpUnitIntegration\WpCli;
 
 final class InstallMultisiteWpTest extends UnitTestCase
 {

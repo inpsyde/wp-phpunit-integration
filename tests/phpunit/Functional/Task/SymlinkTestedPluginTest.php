@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Functional\Task;
+namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
-use Syde\WpPhpunitIntegration\Task\SymlinkTestedPlugin;
-use Syde\WpPhpunitIntegration\Tests\FunctionalTestCase;
+use Syde\WpPhpUnitIntegration\Task\SymlinkTestedPlugin;
+use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
 final class SymlinkTestedPluginTest extends FunctionalTestCase
 {

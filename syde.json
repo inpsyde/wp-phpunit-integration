@@ -36,8 +36,8 @@
             "privatePackagist": true,
             "composerName": "syde\/wp-phpunit-integration",
             "composerType": "library",
-            "composerNamespace": "Syde\\\\WpPhpunitIntegration",
-            "phpNamespace": "Syde\\WpPhpunitIntegration",
+            "composerNamespace": "Syde\\\\WpPhpUnitIntegration",
+            "phpNamespace": "Syde\\WpPhpUnitIntegration",
             "phpVersionMatrix": [
                 "8.2",
                 "8.3",

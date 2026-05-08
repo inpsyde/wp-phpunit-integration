@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Container;
+namespace Syde\WpPhpUnitIntegration\Container;
 
 use InvalidArgumentException;
 use Psr\Container\ContainerInterface;

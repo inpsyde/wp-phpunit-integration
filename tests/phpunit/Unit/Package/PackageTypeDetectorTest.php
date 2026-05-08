@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Tests\Unit\Package;
+namespace Syde\WpPhpUnitIntegration\Tests\Unit\Package;
 
-use Syde\WpPhpunitIntegration\Package\PackageComposerJsonReader;
-use Syde\WpPhpunitIntegration\Package\PackageType;
-use Syde\WpPhpunitIntegration\Package\PackageTypeDetector;
-use Syde\WpPhpunitIntegration\Tests\UnitTestCase;
+use Syde\WpPhpUnitIntegration\Package\PackageComposerJsonReader;
+use Syde\WpPhpUnitIntegration\Package\PackageType;
+use Syde\WpPhpUnitIntegration\Package\PackageTypeDetector;
+use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
 
 final class PackageTypeDetectorTest extends UnitTestCase
 {

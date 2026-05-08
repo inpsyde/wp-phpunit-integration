@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Package;
+namespace Syde\WpPhpUnitIntegration\Package;
 
 use Exception;
-use Syde\WpPhpunitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 
 class PackageComposerJsonReader
 {

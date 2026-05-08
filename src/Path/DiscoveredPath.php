@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Path;
+namespace Syde\WpPhpUnitIntegration\Path;
 
 use Exception;
-use Syde\WpPhpunitIntegration\Path\Finder\LocalDependencyPathFinder;
+use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
 
 abstract class DiscoveredPath implements LocalDependencyPath
 {

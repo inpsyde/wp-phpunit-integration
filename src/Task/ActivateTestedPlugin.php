@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Task;
+namespace Syde\WpPhpUnitIntegration\Task;
 
-use Syde\WpPhpunitIntegration\Path\LocalDependencyPath;
-use Syde\WpPhpunitIntegration\WpCli;
+use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\WpCli;
 use Symfony\Component\Filesystem\Path;
 
 class ActivateTestedPlugin implements Task

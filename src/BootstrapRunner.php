@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration;
+namespace Syde\WpPhpUnitIntegration;
 
 class BootstrapRunner
 {

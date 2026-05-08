@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration;
+namespace Syde\WpPhpUnitIntegration;
 
-use Syde\WpPhpunitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Symfony\Component\Process\Process;
 
 class BuiltInServer

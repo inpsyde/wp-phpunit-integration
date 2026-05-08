@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpunitIntegration\Task;
+namespace Syde\WpPhpUnitIntegration\Task;
 
 interface Task
 {
