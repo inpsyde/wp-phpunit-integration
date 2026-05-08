@@ -37,7 +37,7 @@ final class EnableWpDebugTest extends UnitTestCase
                             'config',
                             'set',
                             'WP_DEBUG_DISPLAY',
-                            'true',
+                            'false',
                         ],
                         4 => [
                             'config',

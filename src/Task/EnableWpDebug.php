@@ -33,7 +33,7 @@ class EnableWpDebug implements Task
             'config',
             'set',
             'WP_DEBUG_DISPLAY',
-            'true',
+            'false',
         ]);
 
         $this->wpCli->run([
