@@ -28,7 +28,7 @@ class InstallMultisiteWp implements Task
         $this->wpCli->run([
             'core',
             'multisite-install',
-            '--url=localhost:8889',
+            '--url=localhost:19254',
             '--title=WordPress Test Environment',
             '--admin_user=admin',
             '--admin_password=password',
