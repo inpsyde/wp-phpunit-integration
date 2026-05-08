@@ -27,10 +27,9 @@ class DefineRequiredWpConstants implements Task
 
         // The SQLite Database Integration plugin comes with multiple "drivers".
         // The AST "drivers" offers a better compatibility with MySQL than the default one.
-        // The default, for example, does not pass the Dbal integration tests according to the preliminary tests we made.
-        //  Until the AST is the default, we need to configure this constant.
-        // https://github.com/WordPress/sqlite-database-integration/blob/535b42a935a778740387a8223c788f8d6155d5f8/wp-includes/sqlite/install-functions.php#L37-L44
         // https://make.wordpress.org/playground/2025/06/13/introducing-a-new-sqlite-driver-for-wordpress/
+        // Until the AST is the default, we need to configure this constant.
+        // https://github.com/WordPress/sqlite-database-integration/blob/535b42a935a778740387a8223c788f8d6155d5f8/wp-includes/sqlite/install-functions.php#L37-L44
         $this->wpCli->run([
             'config',
             'set',
@@ -39,7 +38,7 @@ class DefineRequiredWpConstants implements Task
             '--raw',
         ]);
 
-        // Avoid Performance Lab-related plugin activation.
+        // To avoid Performance Lab-related plugin activation.
         // https://github.com/WordPress/sqlite-database-integration/blob/535b42a935a778740387a8223c788f8d6155d5f8/db.copy#L39-L58
         $this->wpCli->run([
             'config',

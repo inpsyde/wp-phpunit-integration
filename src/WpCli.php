@@ -28,7 +28,7 @@ class WpCli
             '--path=' . $this->wordPressPath->path(),
         ];
 
-        // We need to handle displaying if anything is failed and surfacing the errors even from child PHP processes.
+        // TODO: We might need to handle displaying if anything failed and surfacing the errors even from child PHP processes.
         $this->symfonyProcessFactory->create($extendedArgs)->run();
     }
 }

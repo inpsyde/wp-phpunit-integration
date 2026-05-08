@@ -24,7 +24,7 @@ class CreateSqliteDbDropIn implements Task
         $templateFile = $this->sqliteIntegrationPluginPath->path() . '/db.copy';
         $dbDropInTemplate = $filesystem->readFile($templateFile);
 
-        // The SQLite Database Integration assumes a certain location by default, however, there's a chance that the plugin is installed somewhere else.
+        // The SQLite Database Integration assumes a certain location by default; however, there's a chance that the plugin is installed somewhere else.
         // https://github.com/WordPress/sqlite-database-integration/blob/535b42a935a778740387a8223c788f8d6155d5f8/db.copy#L16-L20
         // It's the safest if we set the location explicitly.
         // When installed with Composer, the location is controlled using the "extra.installer-paths".

@@ -20,15 +20,16 @@ class RefreshSqliteDb implements Task
 
     public function execute(): void
     {
-        // Resetting the db with WP-CLI is not yet supported for SQLite.
-        // https://github.com/wp-cli/db-command/pull/299
-        // To overcome this, we use a separate database for each PHP process that is created by simply creating a copy of the database.
+        // WP-CLI's `wp db` commands currently do not work well with SQLite.
+        // To work around this, each PHP process uses its own SQLite database file, created by copying the original database.
+        // TODO: Revisit the approach taken once WP-CLI fully supports SQLite databases.
         $processDbFile = sprintf(".%s.sqlite", $this->phpProcessIdProvider->currentProcessId());
         $filesystem = new Filesystem();
 
         $this->wpCli->run([
             'config',
             'set',
+            // https://github.com/WordPress/sqlite-database-integration/blob/4f3aab1a5b03b00f42d7b5141ac6a11f9c752256/packages/plugin-sqlite-database-integration/constants.php#L48
             'DB_FILE',
             $processDbFile,
         ]);
