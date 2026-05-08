@@ -8,11 +8,11 @@ use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Syde\WpPhpUnitIntegration\WpCli;
 use Symfony\Component\Filesystem\Path;
 
-class ActivateTestedTheme implements Task
+readonly class ActivateTestedTheme implements Task
 {
     public function __construct(
-        private readonly LocalDependencyPath $packageRootPath,
-        private readonly WpCli $wpCli,
+        private LocalDependencyPath $packageRootPath,
+        private WpCli $wpCli,
     ) {
     }
 

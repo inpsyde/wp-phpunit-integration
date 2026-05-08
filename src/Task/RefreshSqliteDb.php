@@ -9,12 +9,12 @@ use Syde\WpPhpUnitIntegration\PhpProcessIdProvider;
 use Syde\WpPhpUnitIntegration\WpCli;
 use Symfony\Component\Filesystem\Filesystem;
 
-class RefreshSqliteDb implements Task
+readonly class RefreshSqliteDb implements Task
 {
     public function __construct(
-        private readonly LocalDependencyPath $wordPressPath,
-        private readonly PhpProcessIdProvider $phpProcessIdProvider,
-        private readonly WpCli $wpCli,
+        private LocalDependencyPath $wordPressPath,
+        private PhpProcessIdProvider $phpProcessIdProvider,
+        private WpCli $wpCli,
     ) {
     }
 

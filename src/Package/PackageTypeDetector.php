@@ -6,9 +6,9 @@ namespace Syde\WpPhpUnitIntegration\Package;
 
 use Exception;
 
-class PackageTypeDetector
+readonly class PackageTypeDetector
 {
-    public function __construct(private readonly PackageComposerJsonReader $packageComposerJsonReader)
+    public function __construct(private PackageComposerJsonReader $packageComposerJsonReader)
     {
     }
 

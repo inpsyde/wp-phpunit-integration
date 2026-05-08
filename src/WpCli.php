@@ -6,12 +6,12 @@ namespace Syde\WpPhpUnitIntegration;
 
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 
-class WpCli
+readonly class WpCli
 {
     public function __construct(
-        private readonly SymfonyProcessFactory $symfonyProcessFactory,
-        private readonly LocalDependencyPath $wordPressPath,
-        private readonly LocalDependencyPath $wpCliPath,
+        private SymfonyProcessFactory $symfonyProcessFactory,
+        private LocalDependencyPath $wordPressPath,
+        private LocalDependencyPath $wpCliPath,
     ) {
     }
 

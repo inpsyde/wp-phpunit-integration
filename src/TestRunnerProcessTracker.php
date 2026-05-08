@@ -6,13 +6,13 @@ namespace Syde\WpPhpUnitIntegration;
 
 use Exception;
 
-class TestRunnerProcessTracker
+readonly class TestRunnerProcessTracker
 {
     private const MAIN_PROCESS_ID = 'WP_PHPUNIT_INTEGRATION_MAIN_PROCESS_ID';
 
     public function __construct(
-        private readonly PhpProcessIdProvider $phpProcessIdProvider,
-        private readonly EnvVar $envVar,
+        private PhpProcessIdProvider $phpProcessIdProvider,
+        private EnvVar $envVar,
     ) {
     }
 

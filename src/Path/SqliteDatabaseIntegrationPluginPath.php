@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Path;
 
-class SqliteDatabaseIntegrationPluginPath extends DiscoveredPath
+readonly class SqliteDatabaseIntegrationPluginPath extends DiscoveredPath
 {
 }

@@ -6,10 +6,10 @@ namespace Syde\WpPhpUnitIntegration\Task;
 
 use Syde\WpPhpUnitIntegration\WpCli;
 
-class CreateWpConfig implements Task
+readonly class CreateWpConfig implements Task
 {
     public function __construct(
-        private readonly WpCli $wpCli,
+        private WpCli $wpCli,
     ) {
     }
 

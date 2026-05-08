@@ -7,14 +7,14 @@ namespace Syde\WpPhpUnitIntegration\Path;
 use Exception;
 use Symfony\Component\Filesystem\Filesystem;
 
-class PackageRootPath implements LocalDependencyPath
+readonly class PackageRootPath implements LocalDependencyPath
 {
     /**
      * @throws Exception
      */
     public function __construct(
-        private readonly string $packageRootPath,
-        private readonly LocalDependencyPathNormalizer $localDependencyPathNormalizer,
+        private string $packageRootPath,
+        private LocalDependencyPathNormalizer $localDependencyPathNormalizer,
     ) {
         if (!(new Filesystem())->exists($this->packageRootPath)) {
             throw new Exception('Package root path does not exist.');

@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Path;
 
-class WordPressPath extends DiscoveredPath
+readonly class WordPressPath extends DiscoveredPath
 {
 }

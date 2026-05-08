@@ -8,11 +8,11 @@ use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
 
-class SymlinkTestedPlugin implements Task
+readonly class SymlinkTestedPlugin implements Task
 {
     public function __construct(
-        private readonly LocalDependencyPath $packageRootPath,
-        private readonly LocalDependencyPath $wordPressPath,
+        private LocalDependencyPath $packageRootPath,
+        private LocalDependencyPath $wordPressPath,
     ) {
     }
 

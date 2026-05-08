@@ -6,12 +6,12 @@ namespace Syde\WpPhpUnitIntegration\Path\Finder;
 
 use Syde\WpPhpUnitIntegration\EnvVar;
 
-class CachedLocalDependencyPathFinder implements LocalDependencyPathFinder
+readonly class CachedLocalDependencyPathFinder implements LocalDependencyPathFinder
 {
     public function __construct(
-        private readonly LocalDependencyPathFinder $localDependencyPathFinder,
-        private readonly CachedLocalDependencyPathFinderKey $cachedLocalDependencyPathFinderKey,
-        private readonly EnvVar $envVar,
+        private LocalDependencyPathFinder $localDependencyPathFinder,
+        private CachedLocalDependencyPathFinderKey $cachedLocalDependencyPathFinderKey,
+        private EnvVar $envVar,
     ) {
     }
 

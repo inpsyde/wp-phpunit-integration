@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration;
 
-class BootstrapRunner
+readonly class BootstrapRunner
 {
     public function __construct(
-        private readonly BootstrapLifecycle $bootstrapLifecycle,
-        private readonly TestRunnerProcessTracker $phpProcess,
-        private readonly ShutdownFunctionRegisterer $phpShutdownRegisterer,
+        private BootstrapLifecycle $bootstrapLifecycle,
+        private TestRunnerProcessTracker $phpProcess,
+        private ShutdownFunctionRegisterer $phpShutdownRegisterer,
     ) {
     }
 

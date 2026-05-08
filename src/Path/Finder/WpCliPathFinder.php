@@ -9,9 +9,9 @@ use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-class WpCliPathFinder implements LocalDependencyPathFinder
+readonly class WpCliPathFinder implements LocalDependencyPathFinder
 {
-    public function __construct(private readonly LocalDependencyPath $packageRootPath)
+    public function __construct(private LocalDependencyPath $packageRootPath)
     {
     }
 

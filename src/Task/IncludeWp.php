@@ -6,10 +6,10 @@ namespace Syde\WpPhpUnitIntegration\Task;
 
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 
-class IncludeWp implements Task
+readonly class IncludeWp implements Task
 {
     public function __construct(
-        private readonly LocalDependencyPath $wordPressPath,
+        private LocalDependencyPath $wordPressPath,
     ) {
     }
 

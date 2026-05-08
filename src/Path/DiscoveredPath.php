@@ -7,11 +7,11 @@ namespace Syde\WpPhpUnitIntegration\Path;
 use Exception;
 use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
 
-abstract class DiscoveredPath implements LocalDependencyPath
+abstract readonly class DiscoveredPath implements LocalDependencyPath
 {
     public function __construct(
-        private readonly LocalDependencyPathFinder $localDependencyPathFinder,
-        private readonly LocalDependencyPathNormalizer $localDependencyPathNormalizer,
+        private LocalDependencyPathFinder $localDependencyPathFinder,
+        private LocalDependencyPathNormalizer $localDependencyPathNormalizer,
     ) {
     }
 

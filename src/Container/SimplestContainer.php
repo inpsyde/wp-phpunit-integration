@@ -8,13 +8,13 @@ use InvalidArgumentException;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class SimplestContainer implements ContainerInterface
+readonly class SimplestContainer implements ContainerInterface
 {
     /**
      * @param array<class-string, callable(ContainerInterface): object> $serviceDefinitions
      */
     public function __construct(
-        private readonly array $serviceDefinitions,
+        private array $serviceDefinitions,
     ) {
     }
 

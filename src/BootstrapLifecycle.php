@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration;
 
-class BootstrapLifecycle
+readonly class BootstrapLifecycle
 {
     public function __construct(
-        private readonly ?\Closure $setup = null,
-        private readonly ?\Closure $load = null,
-        private readonly ?\Closure $cleanup = null,
+        private ?\Closure $setup = null,
+        private ?\Closure $load = null,
+        private ?\Closure $cleanup = null,
     ) {
     }
 

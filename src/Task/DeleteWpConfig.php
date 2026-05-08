@@ -7,10 +7,10 @@ namespace Syde\WpPhpUnitIntegration\Task;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Symfony\Component\Filesystem\Filesystem;
 
-class DeleteWpConfig implements Task
+readonly class DeleteWpConfig implements Task
 {
     public function __construct(
-        private readonly LocalDependencyPath $wordPressPath,
+        private LocalDependencyPath $wordPressPath,
     ) {
     }
 

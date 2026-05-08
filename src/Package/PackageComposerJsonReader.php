@@ -8,9 +8,9 @@ use Exception;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Symfony\Component\Filesystem\Filesystem;
 
-class PackageComposerJsonReader
+readonly class PackageComposerJsonReader
 {
-    public function __construct(private readonly LocalDependencyPath $packageRootPath)
+    public function __construct(private LocalDependencyPath $packageRootPath)
     {
     }
 
