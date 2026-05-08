@@ -11,7 +11,7 @@ class Bootstrap
 {
     public static function init(
         string $packageRootPath,
-        BootstrapLifecycle $bootstrapSequence = new BootstrapLifecycle(),
+        BootstrapLifecycle $bootstrapLifecycle = new BootstrapLifecycle(),
     ): void {
         try {
             $container = new SimplestContainer(
@@ -22,7 +22,7 @@ class Bootstrap
             ServiceLocator::init($container);
 
             (new BootstrapRunner(
-                $bootstrapSequence,
+                $bootstrapLifecycle,
                 $container->get(TestRunnerProcessTracker::class),
                 $container->get(ShutdownFunctionRegisterer::class),
             ))->execute();
