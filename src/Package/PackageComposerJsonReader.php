@@ -6,6 +6,7 @@ namespace Syde\WpPhpUnitIntegration\Package;
 
 use Exception;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Symfony\Component\Filesystem\Filesystem;
 
 class PackageComposerJsonReader
 {
@@ -18,13 +19,6 @@ class PackageComposerJsonReader
      */
     public function read(): string
     {
-        // TODO: Maybe use Filesystem to read it, as it's used in other places
-        $content = @file_get_contents($this->packageRootPath->path() . '/composer.json');
-
-        if ($content === false) {
-            throw new Exception('Could not read package root composer.json.');
-        }
-
-        return $content;
+        return (new Filesystem())->readFile($this->packageRootPath->path() . '/composer.json');
     }
 }
