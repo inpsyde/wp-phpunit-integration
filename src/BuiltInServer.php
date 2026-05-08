@@ -24,6 +24,7 @@ class BuiltInServer
         self::$process = $this->symfonyProcessFactory->create([
             'php',
             '-S',
+            // The alphabet positions for S Y D E is 19 25 4 5
             '0.0.0.0:19254',
             '-t',
             $this->wordPressPath->path(),
