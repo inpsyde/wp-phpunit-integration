@@ -1,10 +1,7 @@
 includes:
   - vendor/phpstan/phpstan-deprecation-rules/rules.neon
-  - vendor/phpstan/phpstan-mockery/extension.neon
 parameters:
   level: 8
-  scanFiles:
-    - vendor/inpsyde/wp-stubs-versions/latest.php
   paths:
     - ./inc
     - ./src
