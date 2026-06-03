@@ -7,7 +7,7 @@ namespace Syde\WpPhpUnitIntegration\Task;
 use Syde\WpPhpUnitIntegration\EnvVar;
 use Syde\WpPhpUnitIntegration\WpCli;
 
-readonly class UpgradeCoreWp implements Task
+readonly class MaybeUpgradeCoreWp implements Task
 {
     private const ENV_VAR = 'WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION';
 

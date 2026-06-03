@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Syde\WpPhpUnitIntegration\Tests\Unit\Task;
 
 use Syde\WpPhpUnitIntegration\EnvVar;
-use Syde\WpPhpUnitIntegration\Task\UpgradeCoreWp;
+use Syde\WpPhpUnitIntegration\Task\MaybeUpgradeCoreWp;
 use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
 use Syde\WpPhpUnitIntegration\WpCli;
 
-final class UpgradeCoreWpTest extends UnitTestCase
+final class MaybeUpgradeCoreWpTest extends UnitTestCase
 {
     public function testRunsCoreUpgradeWhenEnvVarDefined(): void
     {
@@ -29,7 +29,7 @@ final class UpgradeCoreWpTest extends UnitTestCase
                 ],
             );
 
-        (new UpgradeCoreWp($envVar, $wpCli))->execute();
+        (new MaybeUpgradeCoreWp($envVar, $wpCli))->execute();
     }
 
     public function testSkipsCoreUpgradeWhenEnvVarNotDefined(): void
@@ -42,6 +42,6 @@ final class UpgradeCoreWpTest extends UnitTestCase
             ->expects($this->never())
             ->method('run');
 
-        (new UpgradeCoreWp($envVar, $wpCli))->execute();
+        (new MaybeUpgradeCoreWp($envVar, $wpCli))->execute();
     }
 }

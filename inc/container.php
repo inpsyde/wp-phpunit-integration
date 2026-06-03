@@ -40,13 +40,13 @@ use Syde\WpPhpUnitIntegration\Task\DeleteWpUploadsDir;
 use Syde\WpPhpUnitIntegration\Task\EnableWpDebug;
 use Syde\WpPhpUnitIntegration\Task\IncludeWp;
 use Syde\WpPhpUnitIntegration\Task\InstallMultisiteWp;
+use Syde\WpPhpUnitIntegration\Task\MaybeUpgradeCoreWp;
 use Syde\WpPhpUnitIntegration\Task\Noop;
 use Syde\WpPhpUnitIntegration\Task\RefreshSqliteDb;
 use Syde\WpPhpUnitIntegration\Task\SymlinkTestedPlugin;
 use Syde\WpPhpUnitIntegration\Task\SymlinkTestedTheme;
 use Syde\WpPhpUnitIntegration\Task\UnlinkTestedPlugin;
 use Syde\WpPhpUnitIntegration\Task\UnlinkTestedTheme;
-use Syde\WpPhpUnitIntegration\Task\UpgradeCoreWp;
 use Syde\WpPhpUnitIntegration\TestRunnerProcessTracker;
 use Syde\WpPhpUnitIntegration\WpCli;
 
@@ -145,7 +145,7 @@ return static function (string $packageRootPath): array {
                 $container->get(DefineRequiredWpConstants::class),
                 $container->get(EnableWpDebug::class),
                 $container->get(InstallMultisiteWp::class),
-                $container->get(UpgradeCoreWp::class),
+                $container->get(MaybeUpgradeCoreWp::class),
                 $container->get(CreateEmptyWpThemesDir::class),
                 ...$contextual,
             );
@@ -196,6 +196,10 @@ return static function (string $packageRootPath): array {
         InstallMultisiteWp::class => static fn (ContainerInterface $container): InstallMultisiteWp => new InstallMultisiteWp(
             $container->get(WpCli::class),
         ),
+        MaybeUpgradeCoreWp::class => static fn (ContainerInterface $container): MaybeUpgradeCoreWp => new MaybeUpgradeCoreWp(
+            $container->get(EnvVar::class),
+            $container->get(WpCli::class),
+        ),
         Noop::class => static fn (): Noop => new Noop(),
         RefreshSqliteDb::class => static fn (ContainerInterface $container): RefreshSqliteDb => new RefreshSqliteDb(
             $container->get(WordPressPath::class),
@@ -217,10 +221,6 @@ return static function (string $packageRootPath): array {
         UnlinkTestedTheme::class => static fn (ContainerInterface $container): UnlinkTestedTheme => new UnlinkTestedTheme(
             $container->get(PackageRootPath::class),
             $container->get(WordPressPath::class),
-        ),
-        UpgradeCoreWp::class => static fn (ContainerInterface $container): UpgradeCoreWp => new UpgradeCoreWp(
-            $container->get(EnvVar::class),
-            $container->get(WpCli::class),
         ),
         // /src/
         BuiltInServer::class => static fn (ContainerInterface $container): BuiltInServer => new BuiltInServer(
