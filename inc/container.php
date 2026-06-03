@@ -140,12 +140,12 @@ return static function (string $packageRootPath): array {
             });
 
             return new Setup(
-                $container->get(UpgradeCoreWp::class),
                 $container->get(CreateSqliteDbDropIn::class),
                 $container->get(CreateWpConfig::class),
                 $container->get(DefineRequiredWpConstants::class),
                 $container->get(EnableWpDebug::class),
                 $container->get(InstallMultisiteWp::class),
+                $container->get(UpgradeCoreWp::class),
                 $container->get(CreateEmptyWpThemesDir::class),
                 ...$contextual,
             );
