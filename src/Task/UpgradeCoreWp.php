@@ -21,7 +21,7 @@ readonly class UpgradeCoreWp implements Task
     {
         $wpCoreVersion = $this->envVar->get(self::ENV_VAR);
 
-        if (empty($wpCoreVersion)) {
+        if ($wpCoreVersion === null) {
             return;
         }
 
