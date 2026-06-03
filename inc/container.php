@@ -46,6 +46,7 @@ use Syde\WpPhpUnitIntegration\Task\SymlinkTestedPlugin;
 use Syde\WpPhpUnitIntegration\Task\SymlinkTestedTheme;
 use Syde\WpPhpUnitIntegration\Task\UnlinkTestedPlugin;
 use Syde\WpPhpUnitIntegration\Task\UnlinkTestedTheme;
+use Syde\WpPhpUnitIntegration\Task\UpgradeCoreWp;
 use Syde\WpPhpUnitIntegration\TestRunnerProcessTracker;
 use Syde\WpPhpUnitIntegration\WpCli;
 
@@ -215,6 +216,10 @@ return static function (string $packageRootPath): array {
         UnlinkTestedTheme::class => static fn (ContainerInterface $container): UnlinkTestedTheme => new UnlinkTestedTheme(
             $container->get(PackageRootPath::class),
             $container->get(WordPressPath::class),
+        ),
+        UpgradeCoreWp::class => static fn (ContainerInterface $container): UpgradeCoreWp => new UpgradeCoreWp(
+            $container->get(EnvVar::class),
+            $container->get(WpCli::class),
         ),
         // /src/
         BuiltInServer::class => static fn (ContainerInterface $container): BuiltInServer => new BuiltInServer(
