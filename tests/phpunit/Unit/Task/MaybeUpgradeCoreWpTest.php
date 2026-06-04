@@ -14,7 +14,11 @@ final class MaybeUpgradeCoreWpTest extends UnitTestCase
     public function testRunsCoreUpgradeWhenEnvVarDefined(): void
     {
         $envVar = $this->createMock(EnvVar::class);
-        $envVar->method('get')->with('WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION')->willReturn('3.1');
+        $envVar
+            ->expects($this->once())
+            ->method('get')
+            ->with('WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION')
+            ->willReturn('3.1');
 
         $wpCli = $this->createMock(WpCli::class);
         $wpCli
@@ -35,7 +39,11 @@ final class MaybeUpgradeCoreWpTest extends UnitTestCase
     public function testSkipsCoreUpgradeWhenEnvVarNotDefined(): void
     {
         $envVar = $this->createMock(EnvVar::class);
-        $envVar->method('get')->with('WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION')->willReturn(null);
+        $envVar
+            ->expects($this->once())
+            ->method('get')
+            ->with('WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION')
+            ->willReturn(null);
 
         $wpCli = $this->createMock(WpCli::class);
         $wpCli

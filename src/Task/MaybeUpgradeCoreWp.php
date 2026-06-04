@@ -9,7 +9,7 @@ use Syde\WpPhpUnitIntegration\WpCli;
 
 readonly class MaybeUpgradeCoreWp implements Task
 {
-    private const ENV_VAR = 'WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION';
+    private const WP_VERSION_ENV_VAR = 'WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION';
 
     public function __construct(
         private EnvVar $envVar,
@@ -19,16 +19,16 @@ readonly class MaybeUpgradeCoreWp implements Task
 
     public function execute(): void
     {
-        $wpCoreVersion = $this->envVar->get(self::ENV_VAR);
+        $wpVersion = $this->envVar->get(self::WP_VERSION_ENV_VAR);
 
-        if ($wpCoreVersion === null) {
+        if ($wpVersion === null) {
             return;
         }
 
         $this->wpCli->run([
             'core',
             'upgrade',
-            '--version=' . $wpCoreVersion,
+            '--version=' . $wpVersion,
             '--force',
         ]);
     }
