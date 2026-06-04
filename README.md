@@ -28,14 +28,14 @@ You can also specify where you want to install WordPress by adding the following
 
 ```json
 {
-  "extra": {
-    "wordpress-install-dir": "vendor/wordpress/wordpress",
-    "installer-paths": {
-      "vendor/wordpress/wordpress/wp-content/plugins/{$name}": [
-        "type:wordpress-plugin"
-      ]
+    "extra": {
+        "wordpress-install-dir": "vendor/wordpress/wordpress",
+        "installer-paths": {
+            "vendor/wordpress/wordpress/wp-content/plugins/{$name}": [
+                "type:wordpress-plugin"
+            ]
+        }
     }
-  }
 }
 ```
 
@@ -67,9 +67,9 @@ if (!realpath($vendorPath)) {
     die('Please install via Composer before running tests.');
 }
 
-Bootstrap::init($packagePath);
-
 require_once "{$vendorPath}/autoload.php";
+
+Bootstrap::init($packagePath);
 
 unset($packagePath, $vendorPath);
 ```
@@ -97,12 +97,12 @@ Then, in your `composer.json`, add dedicated integration test scripts alongside 
 
 ```json
 {
-  "scripts": {
-    "tests": "@php ./vendor/bin/phpunit --coverage-text",
-    "tests:no-cov": "@php ./vendor/bin/phpunit --no-coverage",
-    "tests:integration": "@php ./vendor/bin/phpunit -c phpunit-integration.xml.dist --coverage-text",
-    "tests:integration:no-cov": "@php ./vendor/bin/phpunit -c phpunit-integration.xml.dist --no-coverage"
-  }
+    "scripts": {
+        "tests": "@php ./vendor/bin/phpunit --coverage-text",
+        "tests:no-cov": "@php ./vendor/bin/phpunit --no-coverage",
+        "tests:integration": "@php ./vendor/bin/phpunit -c phpunit-integration.xml.dist --coverage-text",
+        "tests:integration:no-cov": "@php ./vendor/bin/phpunit -c phpunit-integration.xml.dist --no-coverage"
+    }
 }
 ```
 
@@ -113,6 +113,30 @@ composer run tests:integration:no-cov
 ```
 
 For most cases, this is all you have to do.
+
+#### GitHub Actions
+
+It's also recommended to run the integration tests as part of the CI/CD pipeline.
+
+To do that, take advantage of the [Reusable Workflows](https://github.com/inpsyde/reusable-workflows/blob/main/docs/php.md#unit-tests-php) and create `/.github/workflows/quality-assurance-php-integration-testing.yml` file with the following content:
+
+```yaml
+name: PHP Integration Testing
+on:
+    pull_request:
+        paths:
+            - '**.php'
+            - 'composer.*'
+            - 'phpunit.*'
+jobs:
+    tests-unit-php:
+        uses: inpsyde/reusable-workflows/.github/workflows/tests-unit-php.yml@main
+        secrets:
+            COMPOSER_AUTH_JSON: '${{secrets.PACKAGIST_AUTH_JSON}}'
+        with:
+            PHPUNIT_ARGS: '-c phpunit-integration.xml.dist --coverage-text'
+            PHP_VERSION: '8.2'
+```
 
 ## Customization
 
@@ -185,6 +209,38 @@ WpTestEnv::addEarlyFilter(
         return false;
     },
 );
+```
+
+### WordPress version
+
+To be able to quickly test against multiple WordPress versions, when the `WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION` environment variable is set, part of the setup process the installed WordPress is updated to the specific version.
+
+```shell
+WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION=6.8 composer run tests:integration:no-cov
+```
+
+This environment variable is optional and doesn't have to be passed. Without it, the already installed WordPress is used, for example, the one installed via Composer.
+
+You can take advantage of this in GitHub Actions and modify your existing workflow as follows:
+
+```yaml
+jobs:
+    tests-unit-php:
+        uses: inpsyde/reusable-workflows/.github/workflows/tests-unit-php.yml@main
+        strategy:
+            fail-fast: false
+            matrix:
+                wp:
+                    - '6.8'
+                    - '6.9'
+                    - '7.0'
+        secrets:
+            COMPOSER_AUTH_JSON: '${{secrets.PACKAGIST_AUTH_JSON}}'
+            ENV_VARS: >-
+                [{"name":"WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION", "value":"${{ matrix.wp }}"}]
+        with:
+            PHPUNIT_ARGS: '-c phpunit-integration.xml.dist --coverage-text'
+            PHP_VERSION: '8.2'
 ```
 
 ## Copyright and License
