@@ -47,6 +47,9 @@ final class MaybeUpgradeCoreWpTest extends UnitTestCase
                     return match ($key) {
                         'WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION' => null,
                         'WP_CORE_VERSION' => '3.1',
+                        default => throw new \Exception(
+                            'Unexpected WordPress core version env retrieved.'
+                        ),
                     };
                 },
             );
@@ -71,7 +74,7 @@ final class MaybeUpgradeCoreWpTest extends UnitTestCase
     {
         $envVar = $this->createMock(EnvVar::class);
         $envVar
-            ->expects($this->any())
+            ->expects($this->exactly(2))
             ->method('get')
             ->willReturn(null);
 
