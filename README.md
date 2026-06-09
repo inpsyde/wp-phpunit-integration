@@ -116,9 +116,9 @@ For most cases, this is all you have to do.
 
 #### GitHub Actions
 
-It's also recommended to run the integration tests as part of the CI/CD pipeline.
+It's also recommended to run the integration tests as part of the CI/CD pipeline. When using GitHub Actions, you can do this by taking advantage of the [Reusable Workflows](https://github.com/inpsyde/reusable-workflows/blob/main/docs/php.md#unit-tests-php). 
 
-To do that, take advantage of the [Reusable Workflows](https://github.com/inpsyde/reusable-workflows/blob/main/docs/php.md#unit-tests-php) and create `/.github/workflows/quality-assurance-php-integration-testing.yml` file with the following content:
+Create a `/.github/workflows/quality-assurance-php-integration-testing.yml` file with the following content:
 
 ```yaml
 name: PHP Integration Testing
@@ -213,15 +213,17 @@ WpTestEnv::addEarlyFilter(
 
 ### WordPress version
 
-To be able to quickly test against multiple WordPress versions, when the `WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION` environment variable is set, part of the setup process the installed WordPress is updated to the specific version.
+To quickly test against multiple WordPress versions, set the `WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION` (or simply `WP_CORE_VERSION`) environment variable. When provided, the setup process will automatically update WordPress to that specific version.
 
 ```shell
-WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION=6.8 composer run tests:integration:no-cov
+WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION=6.8 composer run tests:integration:no-cov
 ```
 
-This environment variable is optional and doesn't have to be passed. Without it, the already installed WordPress is used, for example, the one installed via Composer.
+This environment variable is optional. Without it, the already-installed WordPress version is used.
 
-You can take advantage of this in GitHub Actions and modify your existing workflow as follows:
+#### GitHub Actions
+
+To take advantage of the environment variable in GitHub Actions, amend your existing workflow as follows:
 
 ```yaml
 jobs:
@@ -237,7 +239,7 @@ jobs:
         secrets:
             COMPOSER_AUTH_JSON: '${{secrets.PACKAGIST_AUTH_JSON}}'
             ENV_VARS: >-
-                [{"name":"WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION", "value":"${{ matrix.wp }}"}]
+                [{"name":"WP_CORE_VERSION", "value":"${{ matrix.wp }}"}]
         with:
             PHPUNIT_ARGS: '-c phpunit-integration.xml.dist --coverage-text'
             PHP_VERSION: '8.2'
