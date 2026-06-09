@@ -28,7 +28,9 @@ final class SqliteDatabaseIntegrationPluginFinderTest extends FunctionalTestCase
 
     public function testThrowsExceptionWhenSqlitePluginNotFound(): void
     {
-        $this->expectExceptionMessage('Could not located SQLite Database Integration plugin.');
+        $this->expectExceptionMessageMatches(
+            '/Could not located SQLite Database Integration plugin/',
+        );
 
         $this->filesystem->mkdir($this->workspace . '/acme');
 

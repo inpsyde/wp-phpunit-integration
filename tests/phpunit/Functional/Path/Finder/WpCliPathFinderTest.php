@@ -26,7 +26,7 @@ final class WpCliPathFinderTest extends FunctionalTestCase
 
     public function testFindLocatesWpCliExecutableWhenInVendorBin2(): void
     {
-        $this->expectExceptionMessage('The matched WP-CLI binary is not executable.');
+        $this->expectExceptionMessageMatches('/The matched WP-CLI binary is not executable/');
 
         $this->filesystem->appendToFile($this->workspace . '/acme/vendor/bin/wp', '');
 
@@ -38,7 +38,7 @@ final class WpCliPathFinderTest extends FunctionalTestCase
     public function testFindLocatesWpCliExecutableWhenInVendorBin3(): void
     {
         $this->expectException(\Throwable::class);
-        $this->expectExceptionMessage('Could not locate WP-CLI binary.');
+        $this->expectExceptionMessageMatches('/Could not locate WP-CLI binary/');
 
         $this->filesystem->mkdir($this->workspace . '/acme');
 

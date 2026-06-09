@@ -28,14 +28,14 @@ You can also specify where you want to install WordPress by adding the following
 
 ```json
 {
-  "extra": {
-    "wordpress-install-dir": "vendor/wordpress/wordpress",
-    "installer-paths": {
-      "vendor/wordpress/wordpress/wp-content/plugins/{$name}": [
-        "type:wordpress-plugin"
-      ]
+    "extra": {
+        "wordpress-install-dir": "vendor/wordpress/wordpress",
+        "installer-paths": {
+            "vendor/wordpress/wordpress/wp-content/plugins/{$name}": [
+                "type:wordpress-plugin"
+            ]
+        }
     }
-  }
 }
 ```
 
@@ -67,9 +67,9 @@ if (!realpath($vendorPath)) {
     die('Please install via Composer before running tests.');
 }
 
-Bootstrap::init($packagePath);
-
 require_once "{$vendorPath}/autoload.php";
+
+Bootstrap::init($packagePath);
 
 unset($packagePath, $vendorPath);
 ```
@@ -97,12 +97,12 @@ Then, in your `composer.json`, add dedicated integration test scripts alongside 
 
 ```json
 {
-  "scripts": {
-    "tests": "@php ./vendor/bin/phpunit --coverage-text",
-    "tests:no-cov": "@php ./vendor/bin/phpunit --no-coverage",
-    "tests:integration": "@php ./vendor/bin/phpunit -c phpunit-integration.xml.dist --coverage-text",
-    "tests:integration:no-cov": "@php ./vendor/bin/phpunit -c phpunit-integration.xml.dist --no-coverage"
-  }
+    "scripts": {
+        "tests": "@php ./vendor/bin/phpunit --coverage-text",
+        "tests:no-cov": "@php ./vendor/bin/phpunit --no-coverage",
+        "tests:integration": "@php ./vendor/bin/phpunit -c phpunit-integration.xml.dist --coverage-text",
+        "tests:integration:no-cov": "@php ./vendor/bin/phpunit -c phpunit-integration.xml.dist --no-coverage"
+    }
 }
 ```
 
@@ -113,6 +113,30 @@ composer run tests:integration:no-cov
 ```
 
 For most cases, this is all you have to do.
+
+#### GitHub Actions
+
+It's also recommended to run the integration tests as part of the CI/CD pipeline. When using GitHub Actions, you can do this by taking advantage of the [Reusable Workflows](https://github.com/inpsyde/reusable-workflows/blob/main/docs/php.md#unit-tests-php). 
+
+Create a `/.github/workflows/quality-assurance-php-integration-testing.yml` file with the following content:
+
+```yaml
+name: PHP Integration Testing
+on:
+    pull_request:
+        paths:
+            - '**.php'
+            - 'composer.*'
+            - 'phpunit.*'
+jobs:
+    tests-unit-php:
+        uses: inpsyde/reusable-workflows/.github/workflows/tests-unit-php.yml@main
+        secrets:
+            COMPOSER_AUTH_JSON: '${{secrets.PACKAGIST_AUTH_JSON}}'
+        with:
+            PHPUNIT_ARGS: '-c phpunit-integration.xml.dist --coverage-text'
+            PHP_VERSION: '8.2'
+```
 
 ## Customization
 
@@ -185,6 +209,40 @@ WpTestEnv::addEarlyFilter(
         return false;
     },
 );
+```
+
+### WordPress version
+
+To quickly test against multiple WordPress versions, set the `WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION` (or simply `WP_CORE_VERSION`) environment variable. When provided, the setup process will automatically update WordPress to that specific version.
+
+```shell
+WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION=6.8 composer run tests:integration:no-cov
+```
+
+This environment variable is optional. Without it, the already-installed WordPress version is used.
+
+#### Multiple WordPress versions in GitHub Actions
+
+To take advantage of the environment variable in GitHub Actions, amend your existing workflow as follows:
+
+```yaml
+jobs:
+    tests-unit-php:
+        uses: inpsyde/reusable-workflows/.github/workflows/tests-unit-php.yml@main
+        strategy:
+            fail-fast: false
+            matrix:
+                wp:
+                    - '6.8'
+                    - '6.9'
+                    - '7.0'
+        secrets:
+            COMPOSER_AUTH_JSON: '${{secrets.PACKAGIST_AUTH_JSON}}'
+            ENV_VARS: >-
+                [{"name":"WP_CORE_VERSION", "value":"${{ matrix.wp }}"}]
+        with:
+            PHPUNIT_ARGS: '-c phpunit-integration.xml.dist --coverage-text'
+            PHP_VERSION: '8.2'
 ```
 
 ## Copyright and License

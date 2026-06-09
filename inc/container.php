@@ -40,6 +40,7 @@ use Syde\WpPhpUnitIntegration\Task\DeleteWpUploadsDir;
 use Syde\WpPhpUnitIntegration\Task\EnableWpDebug;
 use Syde\WpPhpUnitIntegration\Task\IncludeWp;
 use Syde\WpPhpUnitIntegration\Task\InstallMultisiteWp;
+use Syde\WpPhpUnitIntegration\Task\MaybeUpgradeCoreWp;
 use Syde\WpPhpUnitIntegration\Task\Noop;
 use Syde\WpPhpUnitIntegration\Task\RefreshSqliteDb;
 use Syde\WpPhpUnitIntegration\Task\SymlinkTestedPlugin;
@@ -144,6 +145,7 @@ return static function (string $packageRootPath): array {
                 $container->get(DefineRequiredWpConstants::class),
                 $container->get(EnableWpDebug::class),
                 $container->get(InstallMultisiteWp::class),
+                $container->get(MaybeUpgradeCoreWp::class),
                 $container->get(CreateEmptyWpThemesDir::class),
                 ...$contextual,
             );
@@ -192,6 +194,10 @@ return static function (string $packageRootPath): array {
             $container->get(WordPressPath::class),
         ),
         InstallMultisiteWp::class => static fn (ContainerInterface $container): InstallMultisiteWp => new InstallMultisiteWp(
+            $container->get(WpCli::class),
+        ),
+        MaybeUpgradeCoreWp::class => static fn (ContainerInterface $container): MaybeUpgradeCoreWp => new MaybeUpgradeCoreWp(
+            $container->get(EnvVar::class),
             $container->get(WpCli::class),
         ),
         Noop::class => static fn (): Noop => new Noop(),

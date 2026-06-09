@@ -28,7 +28,7 @@ final class WordPressPathFinderTest extends FunctionalTestCase
 
     public function testThrowsExceptionWhenWordPressNotFound(): void
     {
-        $this->expectExceptionMessage('Could not locate WordPress installation.');
+        $this->expectExceptionMessageMatches('/Could not locate WordPress installation/');
 
         $this->filesystem->mkdir($this->workspace . '/acme');
 
