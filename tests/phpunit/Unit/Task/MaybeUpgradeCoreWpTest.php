@@ -11,13 +11,13 @@ use Syde\WpPhpUnitIntegration\WpCli;
 
 final class MaybeUpgradeCoreWpTest extends UnitTestCase
 {
-    public function testRunsCoreUpgradeWhenEnvVarDefined(): void
+    public function testRunsCoreUpgradeWhenPrefixedEnvVarDefined(): void
     {
         $envVar = $this->createMock(EnvVar::class);
         $envVar
             ->expects($this->once())
             ->method('get')
-            ->with('WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION')
+            ->with('WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION')
             ->willReturn('3.1');
 
         $wpCli = $this->createMock(WpCli::class);
@@ -36,13 +36,43 @@ final class MaybeUpgradeCoreWpTest extends UnitTestCase
         (new MaybeUpgradeCoreWp($envVar, $wpCli))->execute();
     }
 
-    public function testSkipsCoreUpgradeWhenEnvVarNotDefined(): void
+    public function testRunsCoreUpgradeWhenShortEnvVarDefined(): void
     {
         $envVar = $this->createMock(EnvVar::class);
         $envVar
-            ->expects($this->once())
+            ->expects($this->exactly(2))
             ->method('get')
-            ->with('WP_PHPUNIT_INTEGRATION_WP_CORE_UPGRADE_VERSION')
+            ->willReturnCallback(
+                static function (string $key): ?string {
+                    return match ($key) {
+                        'WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION' => null,
+                        'WP_CORE_VERSION' => '3.1',
+                    };
+                },
+            );
+
+        $wpCli = $this->createMock(WpCli::class);
+        $wpCli
+            ->expects($this->once())
+            ->method('run')
+            ->with(
+                [
+                    'core',
+                    'upgrade',
+                    '--version=3.1',
+                    '--force',
+                ],
+            );
+
+        (new MaybeUpgradeCoreWp($envVar, $wpCli))->execute();
+    }
+
+    public function testSkipsCoreUpgradeWhenEnvVarsNotDefined(): void
+    {
+        $envVar = $this->createMock(EnvVar::class);
+        $envVar
+            ->expects($this->any())
+            ->method('get')
             ->willReturn(null);
 
         $wpCli = $this->createMock(WpCli::class);
