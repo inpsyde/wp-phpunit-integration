@@ -221,7 +221,7 @@ WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION=6.8 composer run tests:integration:no-cov
 
 This environment variable is optional. Without it, the already-installed WordPress version is used.
 
-#### GitHub Actions
+#### Multiple WordPress versions in GitHub Actions
 
 To take advantage of the environment variable in GitHub Actions, amend your existing workflow as follows:
 
