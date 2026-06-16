@@ -10,10 +10,12 @@ use Syde\WpPhpUnitIntegration\Package\PackageType;
 use Syde\WpPhpUnitIntegration\Package\PackageTypeDetector;
 use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinderKey;
+use Syde\WpPhpUnitIntegration\Path\Finder\EnvPathFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\SqliteDatabaseIntegrationPluginFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\WordPressPathFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\WpCliPathFinder;
+use Syde\WpPhpUnitIntegration\Path\EnvPath;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPathNormalizer;
 use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
@@ -40,6 +42,7 @@ use Syde\WpPhpUnitIntegration\Task\DeleteWpUploadsDir;
 use Syde\WpPhpUnitIntegration\Task\EnableWpDebug;
 use Syde\WpPhpUnitIntegration\Task\IncludeWp;
 use Syde\WpPhpUnitIntegration\Task\InstallMultisiteWp;
+use Syde\WpPhpUnitIntegration\Task\LoadEnvVariables;
 use Syde\WpPhpUnitIntegration\Task\MaybeUpgradeCoreWp;
 use Syde\WpPhpUnitIntegration\Task\Noop;
 use Syde\WpPhpUnitIntegration\Task\RefreshSqliteDb;
@@ -61,6 +64,13 @@ return static function (string $packageRootPath): array {
         ),
         // /src/Path/Finder/
         CachedLocalDependencyPathFinderKey::class => static fn (): CachedLocalDependencyPathFinderKey => new CachedLocalDependencyPathFinderKey(),
+        EnvPathFinder::class => static fn (ContainerInterface $container): LocalDependencyPathFinder => new CachedLocalDependencyPathFinder(
+            new EnvPathFinder(
+                $container->get(PackageRootPath::class),
+            ),
+            $container->get(CachedLocalDependencyPathFinderKey::class),
+            $container->get(EnvVar::class),
+        ),
         SqliteDatabaseIntegrationPluginFinder::class => static fn (ContainerInterface $container): LocalDependencyPathFinder => new CachedLocalDependencyPathFinder(
             new SqliteDatabaseIntegrationPluginFinder(
                 $container->get(PackageRootPath::class),
@@ -83,6 +93,10 @@ return static function (string $packageRootPath): array {
             $container->get(EnvVar::class),
         ),
         // /src/Path/
+        EnvPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new EnvPath(
+            $container->get(EnvPathFinder::class),
+            $container->get(LocalDependencyPathNormalizer::class),
+        ),
         LocalDependencyPathNormalizer::class => static fn (): LocalDependencyPathNormalizer => new LocalDependencyPathNormalizer(),
         PackageRootPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new PackageRootPath(
             $packageRootPath,
@@ -140,6 +154,7 @@ return static function (string $packageRootPath): array {
             });
 
             return new Setup(
+                $container->get(LoadEnvVariables::class),
                 $container->get(CreateSqliteDbDropIn::class),
                 $container->get(CreateWpConfig::class),
                 $container->get(DefineRequiredWpConstants::class),
@@ -195,6 +210,9 @@ return static function (string $packageRootPath): array {
         ),
         InstallMultisiteWp::class => static fn (ContainerInterface $container): InstallMultisiteWp => new InstallMultisiteWp(
             $container->get(WpCli::class),
+        ),
+        LoadEnvVariables::class => static fn (ContainerInterface $container): LoadEnvVariables => new LoadEnvVariables(
+            $container->get(EnvPath::class),
         ),
         MaybeUpgradeCoreWp::class => static fn (ContainerInterface $container): MaybeUpgradeCoreWp => new MaybeUpgradeCoreWp(
             $container->get(EnvVar::class),
