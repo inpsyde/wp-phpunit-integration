@@ -13,6 +13,8 @@
     ],
     "require": {
         "php": ">=8.2",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
         "johnpbloch/wp-cli-phar": "^2.12",
         "psr/container": "^2.0",
         "symfony/filesystem": ">=7.4",
