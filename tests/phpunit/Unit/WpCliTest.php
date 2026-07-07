@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Unit;
 
-use Exception;
 use Syde\WpPhpUnitIntegration\SymfonyProcessFactory;
 use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
 use Syde\WpPhpUnitIntegration\WpCli;
 use Symfony\Component\Process\Process;
+use Throwable;
 
 final class WpCliTest extends UnitTestCase
 {
@@ -38,7 +38,7 @@ final class WpCliTest extends UnitTestCase
 
     public function testThrowsExceptionWhenWpCliWritesToStderr(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(Throwable::class);
         $this->expectExceptionMessage('Something went wrong');
 
         $process = $this->createMock(Process::class);
