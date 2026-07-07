@@ -39,7 +39,7 @@ final class WpCliTest extends UnitTestCase
     public function testThrowsExceptionWhenWpCliWritesToStderr(): void
     {
         $this->expectException(Throwable::class);
-        $this->expectExceptionMessage('Something went wrong');
+        $this->expectExceptionMessageMatches('/Something went wrong/');
 
         $process = $this->createMock(Process::class);
         $process
