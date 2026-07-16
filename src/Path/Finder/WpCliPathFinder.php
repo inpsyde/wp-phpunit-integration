@@ -6,8 +6,6 @@ namespace Syde\WpPhpUnitIntegration\Path\Finder;
 
 use Exception;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 
 readonly class WpCliPathFinder implements LocalDependencyPathFinder
 {
@@ -17,27 +15,22 @@ readonly class WpCliPathFinder implements LocalDependencyPathFinder
 
     public function find(): string
     {
-        $matches = (new Finder())
-            ->ignoreDotFiles(false)
-            ->ignoreVCS(false)
-            ->in($this->packageRootPath->path())
-            ->files()
-            ->name('wp');
+        // Composer always exposes a required package's declared bin at this canonical
+        // location, regardless of how deep in the dependency tree it's required from.
+        // Searching the whole package tree for any file named "wp" (as this used to do) is
+        // ambiguous: an installed WordPress plugin can ship its own same-named binary (e.g.
+        // WooCommerce's release zip bundles a broken wp-cli/wp-cli composer bin-proxy at
+        // wp-content/plugins/woocommerce/vendor/bin/wp), which can shadow the real one.
+        $path = $this->packageRootPath->path() . '/vendor/bin/wp';
 
-        if (!$matches->hasResults()) {
+        if (!is_file($path)) {
             throw new Exception('Could not locate WP-CLI binary.');
         }
 
-        $firstMatch = current(iterator_to_array($matches));
-
-        if (!($firstMatch instanceof SplFileInfo)) {
-            throw new Exception();
-        }
-
-        if (!$firstMatch->isExecutable()) {
+        if (!is_executable($path)) {
             throw new Exception('The matched WP-CLI binary is not executable.');
         }
 
-        return $firstMatch->getPathname();
+        return $path;
     }
 }
