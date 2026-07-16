@@ -78,6 +78,7 @@ return static function (string $packageRootPath): array {
         WpCliPathFinder::class => static fn (ContainerInterface $container): LocalDependencyPathFinder => new CachedLocalDependencyPathFinder(
             new WpCliPathFinder(
                 $container->get(PackageRootPath::class),
+                $container->get(EnvVar::class),
             ),
             $container->get(CachedLocalDependencyPathFinderKey::class),
             $container->get(EnvVar::class),
