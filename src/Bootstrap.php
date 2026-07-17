@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration;
 
+use PHPUnit\Event\Facade as PHPUnitEventFacade;
 use Syde\WpPhpUnitIntegration\Container\ServiceLocator;
 use Syde\WpPhpUnitIntegration\Container\SimplestContainer;
+use Syde\WpPhpUnitIntegration\PHPUnit\DeferredWordPressLoadSubscriber;
 
 class Bootstrap
 {
@@ -17,14 +19,22 @@ class Bootstrap
             $container = new SimplestContainer(
                 (require realpath(__DIR__ . '/../inc/container.php'))($packageRootPath),
             );
-            $container->get(TestRunnerProcessTracker::class)->maybeStoreCurrentProcessAsMainProcess();
+            $testRunnerProcessTracker = $container->get(TestRunnerProcessTracker::class);
+            $testRunnerProcessTracker->maybeStoreCurrentProcessAsMainProcess();
 
             ServiceLocator::init($container);
 
+            if ($testRunnerProcessTracker->isCurrentProcessMainProcess()) {
+                PHPUnitEventFacade::instance()->registerSubscriber(
+                    new DeferredWordPressLoadSubscriber($container->get(EnvVar::class)),
+                );
+            }
+
             (new BootstrapRunner(
                 $bootstrapLifecycle,
-                $container->get(TestRunnerProcessTracker::class),
+                $testRunnerProcessTracker,
                 $container->get(ShutdownFunctionRegisterer::class),
+                $container->get(EnvVar::class),
             ))->execute();
         } catch (\Throwable $exception) {
             // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite

@@ -10,6 +10,7 @@ readonly class BootstrapRunner
         private BootstrapLifecycle $bootstrapLifecycle,
         private TestRunnerProcessTracker $phpProcess,
         private ShutdownFunctionRegisterer $phpShutdownRegisterer,
+        private EnvVar $envVar,
     ) {
     }
 
@@ -21,7 +22,11 @@ readonly class BootstrapRunner
         // The bootstrap file is executed in all processes, both the main process and any spawned ones.
         if ($this->phpProcess->isCurrentProcessChildProcess()) {
             $this->bootstrapLifecycle->prepare();
-            $this->bootstrapLifecycle->load();
+
+            if ($this->envVar->get(DeferredWordPressLoad::ENV_VAR) !== '1') {
+                $this->bootstrapLifecycle->load();
+            }
+
             return;
         }
 

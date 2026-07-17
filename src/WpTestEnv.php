@@ -32,6 +32,12 @@ class WpTestEnv
         ServiceLocator::retrieve(Cleanup::class)->execute();
     }
 
+    public static function isCurrentProcessChildProcess(): bool
+    {
+        return ServiceLocator::retrieve(TestRunnerProcessTracker::class)
+            ->isCurrentProcessChildProcess();
+    }
+
     /**
      * @param string[] $args
      */
