@@ -184,6 +184,58 @@ Bootstrap::init(
 );
 ```
 
+### Deferred WordPress loading
+
+The default behavior loads WordPress before test fixtures run. A test class that needs to change its process-local environment first can opt into deferred loading with `#[DeferredWordPressLoad]`:
+
+```php
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\TestCase;
+use Syde\WpPhpUnitIntegration\DeferredWordPressLoad;
+use Syde\WpPhpUnitIntegration\WpTestEnv;
+
+#[DeferredWordPressLoad]
+#[RunTestsInSeparateProcesses]
+#[PreserveGlobalState(false)]
+final class OptionalPluginTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        WpTestEnv::runWpCliCommand([
+            'plugin',
+            'activate',
+            'optional-plugin',
+        ]);
+
+        WpTestEnv::load();
+    }
+}
+```
+
+Only the isolated child processes for the annotated class defer loading. Their `prepare` phase still runs during the bootstrap, but the test fixture must explicitly call `WpTestEnv::load()` after making its changes. Unannotated classes retain the normal eager-loading behavior in the same PHPUnit run.
+
+With class-level process isolation, PHPUnit also invokes `setUpBeforeClass()` in the main process. Guard class-level preparation so it only runs in isolated children:
+
+```php
+public static function setUpBeforeClass(): void
+{
+    if (!WpTestEnv::isCurrentProcessChildProcess()) {
+        return;
+    }
+
+    WpTestEnv::runWpCliCommand([
+        'plugin',
+        'activate',
+        'optional-plugin',
+    ]);
+
+    WpTestEnv::load();
+}
+```
+
+Deferred classes must use PHPUnit process isolation, and the test class itself must be loadable before WordPress or the optional plugin is included. Deactivating the plugin during teardown does not unload its PHP code; process termination provides the isolation between plugin configurations.
+
 ### Helpers
 
 For convenience, `WpTestEnv` exposes some helper methods to cover most customization requirements.
