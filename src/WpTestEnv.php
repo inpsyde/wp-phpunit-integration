@@ -7,6 +7,7 @@ namespace Syde\WpPhpUnitIntegration;
 use Syde\WpPhpUnitIntegration\Container\ServiceLocator;
 use Syde\WpPhpUnitIntegration\Task\Bundle\Cleanup;
 use Syde\WpPhpUnitIntegration\Task\Bundle\Load;
+use Syde\WpPhpUnitIntegration\Task\Bundle\Prepare;
 use Syde\WpPhpUnitIntegration\Task\Bundle\Setup;
 
 class WpTestEnv
@@ -14,6 +15,11 @@ class WpTestEnv
     public static function setup(): void
     {
         ServiceLocator::retrieve(Setup::class)->execute();
+    }
+
+    public static function prepare(): void
+    {
+        ServiceLocator::retrieve(Prepare::class)->execute();
     }
 
     public static function load(): void

@@ -27,6 +27,7 @@ use Syde\WpPhpUnitIntegration\Task\ActivateTestedPlugin;
 use Syde\WpPhpUnitIntegration\Task\ActivateTestedTheme;
 use Syde\WpPhpUnitIntegration\Task\Bundle\Cleanup;
 use Syde\WpPhpUnitIntegration\Task\Bundle\Load;
+use Syde\WpPhpUnitIntegration\Task\Bundle\Prepare;
 use Syde\WpPhpUnitIntegration\Task\Bundle\Setup;
 use Syde\WpPhpUnitIntegration\Task\CreateEmptyWpThemesDir;
 use Syde\WpPhpUnitIntegration\Task\CreateSqliteDbDropIn;
@@ -122,9 +123,11 @@ return static function (string $packageRootPath): array {
             );
         },
         Load::class => static fn (ContainerInterface $container): Load => new Load(
+            $container->get(IncludeWp::class),
+        ),
+        Prepare::class => static fn (ContainerInterface $container): Prepare => new Prepare(
             $container->get(DeleteWpUploadsDir::class),
             $container->get(RefreshSqliteDb::class),
-            $container->get(IncludeWp::class),
         ),
         Setup::class => static function (ContainerInterface $container): Setup {
             $contextual = (match ($container->get(PackageTypeDetector::class)->determine()) {

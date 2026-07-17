@@ -20,6 +20,7 @@ readonly class BootstrapRunner
         // We don’t want to do this every time a new, separate PHP process is started, for example, when --process-isolation is used.
         // The bootstrap file is executed in all processes, both the main process and any spawned ones.
         if ($this->phpProcess->isCurrentProcessChildProcess()) {
+            $this->bootstrapLifecycle->prepare();
             $this->bootstrapLifecycle->load();
             return;
         }
@@ -30,8 +31,9 @@ readonly class BootstrapRunner
 
         $this->phpShutdownRegisterer->register(fn () => $this->bootstrapLifecycle->cleanup());
 
-        // We need to "load" WordPress for each PHP process.
+        // We need to "prepare" and "load" WordPress for each PHP process.
         // This might happen only once if, for example, the --process-isolation is not used.
+        $this->bootstrapLifecycle->prepare();
         $this->bootstrapLifecycle->load();
     }
 }

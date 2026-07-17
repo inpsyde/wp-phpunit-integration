@@ -10,6 +10,7 @@ readonly class BootstrapLifecycle
         private ?\Closure $setup = null,
         private ?\Closure $load = null,
         private ?\Closure $cleanup = null,
+        private ?\Closure $prepare = null,
     ) {
     }
 
@@ -17,6 +18,13 @@ readonly class BootstrapLifecycle
     {
         ($this->setup ?? static function (): void {
             WpTestEnv::setup();
+        })();
+    }
+
+    public function prepare(): void
+    {
+        ($this->prepare ?? static function (): void {
+            WpTestEnv::prepare();
         })();
     }
 

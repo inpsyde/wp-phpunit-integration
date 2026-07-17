@@ -12,11 +12,12 @@ use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
 
 final class BootstrapRunnerTest extends UnitTestCase
 {
-    public function testOnlyLoadSequenceInChildProcess(): void
+    public function testRunsPrepareAndLoadSequenceInChildProcess(): void
     {
         $bootstrapLifecycle = $this->createMock(BootstrapLifecycle::class);
         $bootstrapLifecycle->expects($this->never())->method('setup');
         $bootstrapLifecycle->expects($this->never())->method('cleanup');
+        $bootstrapLifecycle->expects($this->once())->method('prepare');
         $bootstrapLifecycle->expects($this->once())->method('load');
 
         $testRunnerProcessTracker = $this->createMock(TestRunnerProcessTracker::class);
@@ -40,6 +41,7 @@ final class BootstrapRunnerTest extends UnitTestCase
         $bootstrapLifecycle = $this->createMock(BootstrapLifecycle::class);
         $bootstrapLifecycle->expects($this->once())->method('setup');
         $bootstrapLifecycle->expects($this->exactly(2))->method('cleanup');
+        $bootstrapLifecycle->expects($this->once())->method('prepare');
         $bootstrapLifecycle->expects($this->once())->method('load');
 
         $testRunnerProcessTracker = $this->createMock(TestRunnerProcessTracker::class);

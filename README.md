@@ -142,12 +142,13 @@ jobs:
 
 ### Lifecycle phases
 
-WP PHPUnit Integration has three distinct phases that you can customize.
+WP PHPUnit Integration has four distinct phases that you can customize.
 
 The `setup` and `cleanup` phases run only once, before and after all tests are executed. As their names suggest, they trigger steps such as creating the `wp-config.php`, setting up required constants, or undoing these actions.
 
+The `prepare` and `load` phases run for the main test process and every child process. `prepare` resets process-local state, including the SQLite database and uploads directory. `load` then includes WordPress.
 
-The `load` phase is called before both the main test process and any child processes. When the test is run in isolation, `load` is called multiple times, either before the [test class](https://docs.phpunit.de/en/10.5/attributes.html#runtestsinseparateprocesses) or [test method](https://docs.phpunit.de/en/10.5/attributes.html#runinseparateprocess), depending on your PHPUnit [configuration](https://docs.phpunit.de/en/10.5/configuration.html#the-processisolation-attribute).
+By default, `prepare` and `load` run one after the other, preserving the previous eager-loading behavior. When a test is run in isolation, both phases normally run before the [test class](https://docs.phpunit.de/en/10.5/attributes.html#runtestsinseparateprocesses) or [test method](https://docs.phpunit.de/en/10.5/attributes.html#runinseparateprocess), depending on your PHPUnit [configuration](https://docs.phpunit.de/en/10.5/configuration.html#the-processisolation-attribute).
 
 Each phase can be customized by running additional logic before or after the defaults, or by replacing it entirely.
 
@@ -163,6 +164,11 @@ Bootstrap::init(
             // Run some setup tasks before the default ones.
             
             WpTestEnv::setup();
+        },
+        prepare: function () {
+            // Run some preparation before the default process-local reset.
+
+            WpTestEnv::prepare();
         },
         load: function () use ($packagePath) {
             // Omit the default WpTestEnv::load() to use your own custom logic.
