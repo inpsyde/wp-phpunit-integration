@@ -27,7 +27,7 @@ final class WpCliPathFinderTest extends FunctionalTestCase
     public function testWpContentDirectoryIsIgnoredWhenWpCliIsLocated(): void
     {
         $this->filesystem->appendToFile(
-        // `_` is used to force to be the first matched
+            // `_` is used to force to be the first matched
             $this->workspace . '/acme/vendor/_/wp-content/plugins/some-plugin/vendor/bin/wp',
             '',
         );
