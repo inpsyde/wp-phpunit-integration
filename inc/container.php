@@ -24,6 +24,7 @@ use Syde\WpPhpUnitIntegration\PhpProcessIdProvider;
 use Syde\WpPhpUnitIntegration\ShutdownFunctionRegisterer;
 use Syde\WpPhpUnitIntegration\SymfonyProcessFactory;
 use Syde\WpPhpUnitIntegration\Task\ActivateTestedPlugin;
+use Syde\WpPhpUnitIntegration\Task\ActivateTestedPluginDependencies;
 use Syde\WpPhpUnitIntegration\Task\ActivateTestedTheme;
 use Syde\WpPhpUnitIntegration\Task\Bundle\Cleanup;
 use Syde\WpPhpUnitIntegration\Task\Bundle\Load;
@@ -130,6 +131,7 @@ return static function (string $packageRootPath): array {
             $contextual = (match ($container->get(PackageTypeDetector::class)->determine()) {
                 PackageType::Plugin => [
                     $container->get(SymlinkTestedPlugin::class),
+                    $container->get(ActivateTestedPluginDependencies::class),
                     $container->get(ActivateTestedPlugin::class),
                 ],
                 PackageType::Theme => [
@@ -152,6 +154,10 @@ return static function (string $packageRootPath): array {
         },
         // /src/Task/
         ActivateTestedPlugin::class => static fn (ContainerInterface $container): ActivateTestedPlugin => new ActivateTestedPlugin(
+            $container->get(PackageRootPath::class),
+            $container->get(WpCli::class),
+        ),
+        ActivateTestedPluginDependencies::class => static fn (ContainerInterface $container): ActivateTestedPluginDependencies => new ActivateTestedPluginDependencies(
             $container->get(PackageRootPath::class),
             $container->get(WpCli::class),
         ),
