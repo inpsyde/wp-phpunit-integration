@@ -20,7 +20,7 @@ readonly class WpCli
     /**
      * @param string[] $args
      */
-    public function run(array $args): void
+    public function run(array $args): string
     {
         $extendedArgs = [
             $this->wpCliPath->path(),
@@ -29,14 +29,19 @@ readonly class WpCli
             '--skip-themes',
             '--path=' . $this->wordPressPath->path(),
         ];
+        $output = '';
 
         $this->symfonyProcessFactory->create($extendedArgs)->run(
-            static function (string $type, string $data): void {
+            static function (string $type, string $data) use (&$output): void {
                 if ($type === Process::ERR) {
                     // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
                     throw new Exception($data);
                 }
+
+                $output .= $data;
             }
         );
+
+        return $output;
     }
 }
