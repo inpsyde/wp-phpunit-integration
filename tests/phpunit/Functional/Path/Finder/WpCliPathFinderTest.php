@@ -24,6 +24,31 @@ final class WpCliPathFinderTest extends FunctionalTestCase
         );
     }
 
+    public function testWpContentDirectoryIsIgnoredWhenWpCliIsLocated(): void
+    {
+        $this->filesystem->appendToFile(
+        // `_` is used to force to be the first matched
+            $this->workspace . '/acme/vendor/_/wp-content/plugins/some-plugin/vendor/bin/wp',
+            '',
+        );
+        $this->filesystem->chmod(
+            $this->workspace . '/acme/vendor/_/wp-content/plugins/some-plugin/vendor/bin/wp',
+            0755,
+        );
+
+        $this->filesystem->appendToFile($this->workspace . '/acme/vendor/bin/wp', '');
+        $this->filesystem->chmod($this->workspace . '/acme/vendor/bin/wp', 0755);
+
+        $autoDiscoveredWpCliPath = new WpCliPathFinder(
+            $this->localDependencyPath($this->workspace . '/acme'),
+        );
+
+        $this->assertSame(
+            $this->workspace . '/acme/vendor/bin/wp',
+            $autoDiscoveredWpCliPath->find(),
+        );
+    }
+
     public function testFindLocatesWpCliExecutableWhenInVendorBin2(): void
     {
         $this->expectExceptionMessageMatches('/The matched WP-CLI binary is not executable/');
