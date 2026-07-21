@@ -36,6 +36,9 @@ final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
         ))->execute();
     }
 
+    /**
+     * @param list<array{0: list<string>, 1: string}> $wpCliArgsReturnMap
+     */
     #[DataProvider('wpCliArgsReturnMapProvider')]
     public function testRequiredPluginsAreActivated(array $wpCliArgsReturnMap): void
     {
