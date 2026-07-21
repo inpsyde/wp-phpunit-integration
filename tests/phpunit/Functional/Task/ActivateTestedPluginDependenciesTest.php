@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Syde\WpPhpUnitIntegration\Task\ActivateTestedPluginDependencies;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 use Syde\WpPhpUnitIntegration\WpCli;
 
 final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
 {
-    public function testNothingIsActivatedWhenThereAreNoRequiredPlugins(): void
+    public function testPluginActivateNotCalledWhenNoRequiredPlugins(): void
     {
         $this->filesystem->mkdir($this->workspace . '/acme');
 
@@ -35,15 +36,27 @@ final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
         ))->execute();
     }
 
-    public function testRequiredPluginIsActivated(): void
+    #[DataProvider('wpCliArgsReturnMapProvider')]
+    public function testRequiredPluginsAreActivated(array $wpCliArgsReturnMap): void
     {
         $this->filesystem->mkdir($this->workspace . '/acme');
 
         $wpCli = $this->createMock(WpCli::class);
         $wpCli
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(count($wpCliArgsReturnMap)))
             ->method('run')
-            ->willReturnMap([
+            ->willReturnMap($wpCliArgsReturnMap);
+
+        (new ActivateTestedPluginDependencies(
+            $this->localDependencyPath($this->workspace . '/acme'),
+            $wpCli,
+        ))->execute();
+    }
+
+    public static function wpCliArgsReturnMapProvider(): \Generator
+    {
+        yield [
+            [
                 [
                     [
                         'plugin',
@@ -62,23 +75,34 @@ final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
                     ],
                     '',
                 ],
-            ]);
+            ],
+        ];
 
-        (new ActivateTestedPluginDependencies(
-            $this->localDependencyPath($this->workspace . '/acme'),
-            $wpCli,
-        ))->execute();
-    }
+        yield [
+            [
+                [
+                    [
+                        'plugin',
+                        'get',
+                        'acme',
+                        '--field=requires_plugins',
+                        '--format=json',
+                    ],
+                    '"woocommerce,,  ,"',
+                ],
+                [
+                    [
+                        'plugin',
+                        'activate',
+                        'woocommerce',
+                    ],
+                    '',
+                ],
+            ],
+        ];
 
-    public function testMultipleRequiredPluginsAreActivated(): void
-    {
-        $this->filesystem->mkdir($this->workspace . '/acme');
-
-        $wpCli = $this->createMock(WpCli::class);
-        $wpCli
-            ->expects($this->exactly(3))
-            ->method('run')
-            ->willReturnMap([
+        yield [
+            [
                 [
                     [
                         'plugin',
@@ -105,11 +129,7 @@ final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
                     ],
                     '',
                 ],
-            ]);
-
-        (new ActivateTestedPluginDependencies(
-            $this->localDependencyPath($this->workspace . '/acme'),
-            $wpCli,
-        ))->execute();
+            ],
+        ];
     }
 }
