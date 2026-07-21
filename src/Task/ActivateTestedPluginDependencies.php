@@ -18,35 +18,36 @@ readonly class ActivateTestedPluginDependencies implements Task
 
     public function execute(): void
     {
-        $name = Path::getFilenameWithoutExtension($this->packageRootPath->path());
+        $testedPluginName = Path::getFilenameWithoutExtension($this->packageRootPath->path());
 
+        foreach ($this->requiredPlugins($testedPluginName) as $requiredPlugin) {
+            $this->wpCli->run(['plugin', 'activate', $requiredPlugin]);
+        }
+    }
+
+    /**
+     * @return string[]
+     */
+    private function requiredPlugins(string $pluginName): array
+    {
         $requiredPluginsField = json_decode(
             $this->wpCli->run([
                 'plugin',
                 'get',
-                $name,
+                $pluginName,
                 '--field=requires_plugins',
                 '--format=json',
             ]),
-            true,
-            JSON_THROW_ON_ERROR,
+            flags: JSON_THROW_ON_ERROR,
         );
 
-        if ($requiredPluginsField === '') {
-            return;
+        if (!is_string($requiredPluginsField) || $requiredPluginsField === '') {
+            return [];
         }
 
-        $requiredPlugins = array_map(
+        return array_map(
             'trim',
             explode(',', $requiredPluginsField),
         );
-
-        foreach ($requiredPlugins as $requiredPlugin) {
-            $this->wpCli->run([
-                'plugin',
-                'activate',
-                $requiredPlugin,
-            ]);
-        }
     }
 }
