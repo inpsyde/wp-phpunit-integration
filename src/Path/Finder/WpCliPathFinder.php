@@ -21,6 +21,7 @@ readonly class WpCliPathFinder implements LocalDependencyPathFinder
             ->ignoreDotFiles(false)
             ->ignoreVCS(false)
             ->in($this->packageRootPath->path())
+            ->exclude('wp-content')
             ->files()
             ->name('wp');
 
