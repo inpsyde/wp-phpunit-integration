@@ -26,10 +26,9 @@ class WpTestEnv
         ServiceLocator::retrieve(Cleanup::class)->execute();
     }
 
-    // phpcs:ignore Syde.NamingConventions.ElementNameMinimalLength.TooShort
-    public static function fs(): Fs
+    public static function filesystem(): Filesystem
     {
-        return ServiceLocator::retrieve(Fs::class);
+        return ServiceLocator::retrieve(Filesystem::class);
     }
 
     /**

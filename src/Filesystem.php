@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Syde\WpPhpUnitIntegration;
 
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
-use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
 /**
  * @method void copy(string $originFile, string $targetFile, bool $overwriteNewerFiles = false)
@@ -15,16 +15,15 @@ use Symfony\Component\Filesystem\Filesystem;
  * @method void symlink(string $originDir, string $targetDir, bool $copyOnWindows = false)
  * @method void dumpFile(string $filename, $content)
  */
-// phpcs:ignore Syde.NamingConventions.ElementNameMinimalLength.TooShort
-readonly class Fs
+readonly class Filesystem
 {
-    private Filesystem $filesystem;
+    private SymfonyFilesystem $filesystem;
 
     public function __construct(
         private LocalDependencyPath $packageRootPath,
         private LocalDependencyPath $wordPressPath,
     ) {
-        $this->filesystem = new Filesystem();
+        $this->filesystem = new SymfonyFilesystem();
     }
 
     public function packageRootPath(): string

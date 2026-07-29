@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Psr\Container\ContainerInterface;
 use Syde\WpPhpUnitIntegration\BuiltInServer;
 use Syde\WpPhpUnitIntegration\EnvVar;
-use Syde\WpPhpUnitIntegration\Fs;
+use Syde\WpPhpUnitIntegration\Filesystem;
 use Syde\WpPhpUnitIntegration\Package\PackageComposerJsonReader;
 use Syde\WpPhpUnitIntegration\Package\PackageType;
 use Syde\WpPhpUnitIntegration\Package\PackageTypeDetector;
@@ -235,7 +235,7 @@ return static function (string $packageRootPath): array {
             $container->get(WordPressPath::class),
         ),
         EnvVar::class => static fn (): EnvVar => new EnvVar(),
-        Fs::class => static fn (ContainerInterface $container): Fs => new Fs(
+        Filesystem::class => static fn (ContainerInterface $container): Filesystem => new Filesystem(
             $container->get(PackageRootPath::class),
             $container->get(WordPressPath::class),
         ),
