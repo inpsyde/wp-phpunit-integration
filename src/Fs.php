@@ -7,36 +7,45 @@ namespace Syde\WpPhpUnitIntegration;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * @method void copy(string $originFile, string $targetFile, bool $overwriteNewerFiles = false)
+ * @method void mkdir(string|iterable<string> $dirs, int $mode = 0o777)
+ * @method bool exists(string|iterable<string> $files)
+ * @method void remove(string|iterable<string> $files)
+ * @method void symlink(string $originDir, string $targetDir, bool $copyOnWindows = false)
+ * @method void dumpFile(string $filename, $content)
+ */
 // phpcs:ignore Syde.NamingConventions.ElementNameMinimalLength.TooShort
 readonly class Fs
 {
     private Filesystem $filesystem;
 
     public function __construct(
-        public LocalDependencyPath $packageRootPath,
-        public LocalDependencyPath $wordPressPath,
+        private LocalDependencyPath $packageRootPath,
+        private LocalDependencyPath $wordPressPath,
     ) {
         $this->filesystem = new Filesystem();
     }
 
-    public function copy(string $fromPath, string $toPath): void
+    public function packageRootPath(): string
     {
-        $this->filesystem->copy($fromPath, $toPath);
+        return $this->packageRootPath->path();
     }
 
-    public function remove(string $path): void
+    public function wordPressPath(): string
     {
-        $this->filesystem->remove($path);
+        return $this->wordPressPath->path();
     }
 
-    public function createDir(string $path): void
+    /**
+     * @param list<mixed> $arguments
+     */
+    public function __call(string $method, array $arguments): mixed
     {
-        $this->filesystem->mkdir($path);
-    }
+        if (!method_exists($this->filesystem, $method)) {
+            throw new \BadMethodCallException();
+        }
 
-    public function writeFile(string $path, string $content): void
-    {
-
-        $this->filesystem->dumpFile($path, $content);
+        return $this->filesystem->{$method}(...$arguments);
     }
 }
