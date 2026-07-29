@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Psr\Container\ContainerInterface;
 use Syde\WpPhpUnitIntegration\BuiltInServer;
 use Syde\WpPhpUnitIntegration\EnvVar;
+use Syde\WpPhpUnitIntegration\Fs;
 use Syde\WpPhpUnitIntegration\Package\PackageComposerJsonReader;
 use Syde\WpPhpUnitIntegration\Package\PackageType;
 use Syde\WpPhpUnitIntegration\Package\PackageTypeDetector;
@@ -234,6 +235,10 @@ return static function (string $packageRootPath): array {
             $container->get(WordPressPath::class),
         ),
         EnvVar::class => static fn (): EnvVar => new EnvVar(),
+        Fs::class => static fn (ContainerInterface $container): Fs => new Fs(
+            $container->get(PackageRootPath::class),
+            $container->get(WordPressPath::class),
+        ),
         PhpProcessIdProvider::class => static fn (): PhpProcessIdProvider => new PhpProcessIdProvider(),
         ShutdownFunctionRegisterer::class => static fn (): ShutdownFunctionRegisterer => new ShutdownFunctionRegisterer(),
         SymfonyProcessFactory::class => static fn (): SymfonyProcessFactory => new SymfonyProcessFactory(),
