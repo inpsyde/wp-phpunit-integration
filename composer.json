@@ -21,7 +21,7 @@
         "symfony/finder": ">=7.4",
         "symfony/process": ">=7.4",
         "wecodemore/wordpress-early-hook": "^1.4",
-        "wpackagist-plugin/sqlite-database-integration": "2.2.23"
+        "wp-plugin/sqlite-database-integration": "2.2.23"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.51",
@@ -37,11 +37,9 @@
     },
     "repositories": [
         {
+            "name": "wp-packages",
             "type": "composer",
-            "url": "https://repo.packagist.com/inpsyde/"
-        },
-        {
-            "packagist.org": false
+            "url": "https://repo.wp-packages.org"
         }
     ],
     "minimum-stability": "dev",
