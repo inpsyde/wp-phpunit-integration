@@ -15,7 +15,7 @@ All you need is PHP. You don't need a database service running, such as MySQL or
 
 ### Installation
 
-You can require this package with Composer:
+As a first step, require this package with Composer:
 
 ```shell
 composer require --dev syde/wp-phpunit-integration
@@ -79,7 +79,7 @@ unset($packagePath, $vendorPath);
 
 #### PHPUnit configuration
 
-Create a `/phpunit-integration.xml.dist` file with the following content:
+Next, create a `/phpunit-integration.xml.dist` file with the following content:
 
 ```xml
 <phpunit
@@ -96,7 +96,7 @@ Create a `/phpunit-integration.xml.dist` file with the following content:
 
 #### Composer scripts
 
-Then, in your `composer.json`, add dedicated integration test scripts alongside your existing ones:
+Finally, in your `composer.json`, add dedicated integration test scripts alongside your existing ones:
 
 ```json
 {
@@ -109,7 +109,7 @@ Then, in your `composer.json`, add dedicated integration test scripts alongside 
 }
 ```
 
-If you have followed these steps, you should now be able to run your integration tests with:
+If you've followed these steps, you should now be able to run your integration tests with:
 
 ```shell
 composer run tests:integration:no-cov
@@ -151,7 +151,7 @@ The `setup` and `cleanup` phases run only once, before and after all tests are e
 
 The `load` phase is called before both the main test process and any child processes. When the test is run in isolation, `load` is called multiple times, either before the [test class](https://docs.phpunit.de/en/10.5/attributes.html#runtestsinseparateprocesses) or [test method](https://docs.phpunit.de/en/10.5/attributes.html#runinseparateprocess), depending on your PHPUnit [configuration](https://docs.phpunit.de/en/10.5/configuration.html#the-processisolation-attribute).
 
-Each phase can be customized by running additional logic before or after the defaults, or by replacing it entirely.
+Each phase can be customized by running additional logic before or after the defaults, or by replacing it entirely:
 
 ```php
 use Syde\WpPhpUnitIntegration\Bootstrap;
@@ -198,7 +198,7 @@ WpTestEnv::runWpCliCommand([
 
 `runWpCliCommand` returns the `stdout` output, and if an error occurs, an exception is thrown with the error message returned by WP-CLI.
 
-You can use any WP-CLI commands, but keep in mind that they are called with the `--skip-plugins,` `--skip-themes,` and an explicit `--path` option.
+You can use any WP-CLI commands, but keep in mind that they are called with the `--skip-plugins`, `--skip-themes`, and an explicit `--path` option.
 
 #### Early hooks
 
