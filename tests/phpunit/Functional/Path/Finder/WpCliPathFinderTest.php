@@ -51,6 +51,10 @@ final class WpCliPathFinderTest extends FunctionalTestCase
 
     public function testThrowsWhenLocatedWpCliIsNotExecutable(): void
     {
+        if (\DIRECTORY_SEPARATOR === '\\') {
+            $this->markTestSkipped('Windows has no POSIX file permissions to test.');
+        }
+
         $this->expectExceptionMessageMatches('/The matched WP-CLI binary is not executable/');
 
         $this->filesystem->appendToFile($this->workspace . '/acme/vendor/bin/wp', '');
