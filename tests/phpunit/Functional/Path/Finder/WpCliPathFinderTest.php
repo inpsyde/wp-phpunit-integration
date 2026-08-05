@@ -58,6 +58,7 @@ final class WpCliPathFinderTest extends FunctionalTestCase
         $this->expectExceptionMessageMatches('/The matched WP-CLI binary is not executable/');
 
         $this->filesystem->appendToFile($this->workspace . '/acme/vendor/bin/wp', '');
+        $this->filesystem->chmod($this->workspace . '/acme/vendor/bin/wp', 0644);
 
         (new WpCliPathFinder(
             $this->localDependencyPath($this->workspace . '/acme'),
