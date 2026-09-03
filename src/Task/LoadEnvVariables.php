@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Task;
 
-use Exception;
 use Syde\WpPhpUnitIntegration\Path\EnvPath;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -18,7 +17,7 @@ readonly class LoadEnvVariables implements Task
     {
         try {
             $path = $this->envPath->path();
-        } catch (Exception) {
+        } catch (\Throwable) {
             return;
         }
 
