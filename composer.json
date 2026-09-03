@@ -37,11 +37,13 @@
     },
     "repositories": [
         {
+            "name": "wpackagist",
             "type": "composer",
-            "url": "https://repo.packagist.com/inpsyde/"
-        },
-        {
-            "packagist.org": false
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
         }
     ],
     "minimum-stability": "dev",
