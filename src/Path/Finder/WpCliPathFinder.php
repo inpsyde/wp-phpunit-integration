@@ -21,6 +21,7 @@ readonly class WpCliPathFinder implements LocalDependencyPathFinder
             ->ignoreDotFiles(false)
             ->ignoreVCS(false)
             ->in($this->packageRootPath->path())
+            ->exclude('wp-content')
             ->files()
             ->name('wp');
 
@@ -34,10 +35,15 @@ readonly class WpCliPathFinder implements LocalDependencyPathFinder
             throw new Exception();
         }
 
-        if (!$firstMatch->isExecutable()) {
+        if (!$this->isWindows() && !$firstMatch->isExecutable()) {
             throw new Exception('The matched WP-CLI binary is not executable.');
         }
 
         return $firstMatch->getPathname();
+    }
+
+    private function isWindows(): bool
+    {
+        return \DIRECTORY_SEPARATOR === '\\';
     }
 }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration;
 
+use Exception;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Symfony\Component\Process\Process;
 
 readonly class WpCli
 {
@@ -18,7 +20,7 @@ readonly class WpCli
     /**
      * @param string[] $args
      */
-    public function run(array $args): void
+    public function run(array $args): string
     {
         $extendedArgs = [
             $this->wpCliPath->path(),
@@ -27,8 +29,19 @@ readonly class WpCli
             '--skip-themes',
             '--path=' . $this->wordPressPath->path(),
         ];
+        $output = '';
 
-        // TODO: We might need to handle displaying if anything failed and surfacing the errors even from child PHP processes.
-        $this->symfonyProcessFactory->create($extendedArgs)->run();
+        $this->symfonyProcessFactory->create($extendedArgs)->run(
+            static function (string $type, string $data) use (&$output): void {
+                if ($type === Process::ERR) {
+                    // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+                    throw new Exception($data);
+                }
+
+                $output .= $data;
+            }
+        );
+
+        return $output;
     }
 }
