@@ -17,13 +17,11 @@ use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
  */
 readonly class Filesystem
 {
-    private SymfonyFilesystem $filesystem;
-
     public function __construct(
+        private SymfonyFilesystem $symfonyFilesystem,
         private LocalDependencyPath $packageRootPath,
         private LocalDependencyPath $wordPressPath,
     ) {
-        $this->filesystem = new SymfonyFilesystem();
     }
 
     public function packageRootPath(): string
@@ -41,10 +39,10 @@ readonly class Filesystem
      */
     public function __call(string $method, array $arguments): mixed
     {
-        if (!method_exists($this->filesystem, $method)) {
+        if (!method_exists($this->symfonyFilesystem, $method)) {
             throw new \BadMethodCallException();
         }
 
-        return $this->filesystem->{$method}(...$arguments);
+        return $this->symfonyFilesystem->{$method}(...$arguments);
     }
 }

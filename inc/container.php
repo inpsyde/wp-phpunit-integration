@@ -51,6 +51,7 @@ use Syde\WpPhpUnitIntegration\Task\UnlinkTestedPlugin;
 use Syde\WpPhpUnitIntegration\Task\UnlinkTestedTheme;
 use Syde\WpPhpUnitIntegration\TestRunnerProcessTracker;
 use Syde\WpPhpUnitIntegration\WpCli;
+use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
 return static function (string $packageRootPath): array {
     return [
@@ -236,6 +237,7 @@ return static function (string $packageRootPath): array {
         ),
         EnvVar::class => static fn (): EnvVar => new EnvVar(),
         Filesystem::class => static fn (ContainerInterface $container): Filesystem => new Filesystem(
+            new SymfonyFilesystem(),
             $container->get(PackageRootPath::class),
             $container->get(WordPressPath::class),
         ),
