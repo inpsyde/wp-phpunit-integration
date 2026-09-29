@@ -20,7 +20,7 @@ use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
  * @method void rename(string $origin, string $target, bool $overwrite = false)
  * @method void symlink(string $originDir, string $targetDir, bool $copyOnWindows = false)
  * @method void hardlink(string $originFile, string|iterable<string> $targetFiles)
- * @method ?string readlink(string $path, bool $canonicalize = false)
+ * @method string|null readlink(string $path, bool $canonicalize = false)
  * @method string makePathRelative(string $endPath, string $startPath)
  * @method void mirror(string $originDir, string $targetDir, ?\Traversable<\SplFileInfo> $iterator = null, array<string, bool> $options = [])
  * @method bool isAbsolutePath(string $file)
