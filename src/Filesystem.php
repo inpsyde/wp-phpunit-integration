@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration;
 
+use BadMethodCallException;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
@@ -55,7 +56,7 @@ readonly class Filesystem
     public function __call(string $method, array $arguments): mixed
     {
         if (!method_exists($this->symfonyFilesystem, $method)) {
-            throw new \BadMethodCallException();
+            throw new BadMethodCallException();
         }
 
         return $this->symfonyFilesystem->{$method}(...$arguments);
