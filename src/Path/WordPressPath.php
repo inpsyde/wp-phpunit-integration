@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Path;
 
+use Throwable;
+
 readonly class WordPressPath implements LocalDependencyPath
 {
     private const PACKAGE_NAME = 'roots/wordpress';
@@ -18,8 +20,8 @@ readonly class WordPressPath implements LocalDependencyPath
     public function path(): string
     {
         try {
-            $wordPressPath = $this->composerPackagePath->installedPath(self::PACKAGE_NAME);
-        } catch (\Throwable) {
+            $wordPressPath = $this->composerPackagePath->installPath(self::PACKAGE_NAME);
+        } catch (Throwable) {
             $wordPressPath = $this->wordPressPathFinder->discoveredPath();
         }
 

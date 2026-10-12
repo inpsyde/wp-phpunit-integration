@@ -16,13 +16,13 @@ final class WordPressPathFinderTest extends FunctionalTestCase
             '',
         );
 
-        $autoDiscoveredWordPressPath = new WordPressPathFinder(
+        $wordPressPathFinder = new WordPressPathFinder(
             $this->localDependencyPath($this->workspace . '/acme'),
         );
 
         $this->assertSame(
             $this->workspace . '/acme/vendor/roots/wordpress',
-            $autoDiscoveredWordPressPath->discoveredPath(),
+            $wordPressPathFinder->discoveredPath(),
         );
     }
 

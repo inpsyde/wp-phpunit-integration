@@ -17,7 +17,7 @@ readonly class SqliteDatabaseIntegrationPluginPath implements LocalDependencyPat
     public function path(): string
     {
         return $this->localDependencyPathNormalizer->normalize(
-            $this->composerPackagePath->installedPath(self::PACKAGE_NAME),
+            $this->composerPackagePath->installPath(self::PACKAGE_NAME),
         );
     }
 }

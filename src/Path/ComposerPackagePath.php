@@ -12,7 +12,7 @@ class ComposerPackagePath
     /**
      * @throws Exception
      */
-    public function installedPath(string $package): string
+    public function installPath(string $package): string
     {
         $installPath = InstalledVersions::getInstallPath($package);
 

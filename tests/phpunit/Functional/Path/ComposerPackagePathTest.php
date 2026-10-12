@@ -31,7 +31,7 @@ final class ComposerPackagePathTest extends FunctionalTestCase
 
         $this->assertSame(
             $workspace . $expectedPath,
-            (new ComposerPackagePath())->installedPath('some/package'),
+            (new ComposerPackagePath())->installPath('some/package'),
         );
     }
 
@@ -59,6 +59,6 @@ final class ComposerPackagePathTest extends FunctionalTestCase
             'versions' => [],
         ]);
 
-        (new ComposerPackagePath())->installedPath('some/package');
+        (new ComposerPackagePath())->installPath('some/package');
     }
 }

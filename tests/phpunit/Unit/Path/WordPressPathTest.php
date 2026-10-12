@@ -17,7 +17,7 @@ final class WordPressPathTest extends UnitTestCase
     {
         $composerPackagePath = $this->createMock(ComposerPackagePath::class);
         $composerPackagePath
-            ->method('installedPath')
+            ->method('installPath')
             ->with('roots/wordpress')
             ->willReturn('/vendor/wordpress');
 
@@ -45,7 +45,7 @@ final class WordPressPathTest extends UnitTestCase
     {
         $composerPackagePath = $this->createMock(ComposerPackagePath::class);
         $composerPackagePath
-            ->method('installedPath')
+            ->method('installPath')
             ->willThrowException(new Exception());
 
         $wordpressPathFinder = $this->createMock(WordPressPathFinder::class);
