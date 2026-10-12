@@ -4,6 +4,24 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Path;
 
-readonly class WpCliPath extends DiscoveredPath
+use Exception;
+use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
+
+readonly class WpCliPath implements LocalDependencyPath
 {
+    public function __construct(
+        private LocalDependencyPathFinder $localDependencyPathFinder,
+        private LocalDependencyPathNormalizer $localDependencyPathNormalizer,
+    ) {
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function path(): string
+    {
+        return $this->localDependencyPathNormalizer->normalize(
+            $this->localDependencyPathFinder->find(),
+        );
+    }
 }
