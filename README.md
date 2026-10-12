@@ -21,6 +21,24 @@ As a first step, require this package with Composer:
 composer require --dev syde/wp-phpunit-integration
 ```
 
+Keep in mind that the "internal" SQLite Database Integration plugin dependency is required from [WPackagist](https://wpackagist.org/). If you don't already have WPackagist's repository configured, or it is not mirrored by your existing repositories, add the following to your `composer.json`:
+
+```json
+{
+    "repositories": [
+        {
+            "name": "wpackagist",
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
+        }
+    ]
+}
+```
+
 You will also need WordPress, though it is not a hard requirement to install it via Composer. In most cases, it's the most straightforward approach:
 
 ```shell
