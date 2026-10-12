@@ -17,12 +17,14 @@ class ComposerPackagePath
         $installPath = InstalledVersions::getInstallPath($package);
 
         if ($installPath === null) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             throw new Exception("Package $package is not installed.");
         }
 
         $installRealPath = realpath($installPath);
 
         if ($installRealPath === false) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             throw new Exception("Can't determine real path of $package.");
         }
 
