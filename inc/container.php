@@ -13,7 +13,6 @@ use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinderKey;
 use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\WordPressPathFinder;
-use Syde\WpPhpUnitIntegration\Path\Finder\WpCliPathFinder;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPathNormalizer;
 use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
@@ -69,13 +68,6 @@ return static function (string $packageRootPath): array {
             $container->get(CachedLocalDependencyPathFinderKey::class),
             $container->get(EnvVar::class),
         ),
-        WpCliPathFinder::class => static fn (ContainerInterface $container): LocalDependencyPathFinder => new CachedLocalDependencyPathFinder(
-            new WpCliPathFinder(
-                $container->get(PackageRootPath::class),
-            ),
-            $container->get(CachedLocalDependencyPathFinderKey::class),
-            $container->get(EnvVar::class),
-        ),
         // /src/Path/
         ComposerPackagePath::class => static fn (): ComposerPackagePath => new ComposerPackagePath(),
         LocalDependencyPathNormalizer::class => static fn (): LocalDependencyPathNormalizer => new LocalDependencyPathNormalizer(),
@@ -92,7 +84,7 @@ return static function (string $packageRootPath): array {
             $container->get(LocalDependencyPathNormalizer::class),
         ),
         WpCliPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new WpCliPath(
-            $container->get(WpCliPathFinder::class),
+            $container->get(ComposerPackagePath::class),
             $container->get(LocalDependencyPathNormalizer::class),
         ),
         // /src/Task/Bundle/

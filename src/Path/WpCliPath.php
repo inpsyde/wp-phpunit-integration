@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Syde\WpPhpUnitIntegration\Path;
 
 use Exception;
-use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
 
 readonly class WpCliPath implements LocalDependencyPath
 {
+    private const PACKAGE_NAME = 'johnpbloch/wp-cli-phar';
+
     public function __construct(
-        private LocalDependencyPathFinder $localDependencyPathFinder,
+        private ComposerPackagePath $composerPackagePath,
         private LocalDependencyPathNormalizer $localDependencyPathNormalizer,
     ) {
     }
@@ -21,7 +22,7 @@ readonly class WpCliPath implements LocalDependencyPath
     public function path(): string
     {
         return $this->localDependencyPathNormalizer->normalize(
-            $this->localDependencyPathFinder->find(),
-        );
+            $this->composerPackagePath->installedPath(self::PACKAGE_NAME),
+        ) . '/wp';
     }
 }
