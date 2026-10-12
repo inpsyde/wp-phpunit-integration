@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Path;
 
-use Exception;
-
 readonly class WpCliPath implements LocalDependencyPath
 {
     private const PACKAGE_NAME = 'johnpbloch/wp-cli-phar';
@@ -16,9 +14,6 @@ readonly class WpCliPath implements LocalDependencyPath
     ) {
     }
 
-    /**
-     * @throws Exception
-     */
     public function path(): string
     {
         return $this->localDependencyPathNormalizer->normalize(

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Path;
 
-use Exception;
-
 readonly class SqliteDatabaseIntegrationPluginPath implements LocalDependencyPath
 {
     private const PACKAGE_NAME = 'wpackagist-plugin/sqlite-database-integration';
@@ -16,9 +14,6 @@ readonly class SqliteDatabaseIntegrationPluginPath implements LocalDependencyPat
     ) {
     }
 
-    /**
-     * @throws Exception
-     */
     public function path(): string
     {
         return $this->localDependencyPathNormalizer->normalize(
