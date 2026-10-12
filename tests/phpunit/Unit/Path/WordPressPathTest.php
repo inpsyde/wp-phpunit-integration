@@ -17,6 +17,7 @@ final class WordPressPathTest extends UnitTestCase
     {
         $composerPackagePath = $this->createMock(ComposerPackagePath::class);
         $composerPackagePath
+            ->expects($this->once())
             ->method('installPath')
             ->with('roots/wordpress')
             ->willReturn('/vendor/wordpress');

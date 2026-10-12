@@ -15,6 +15,7 @@ final class WpCliPathTest extends UnitTestCase
     {
         $composerPackagePath = $this->createMock(ComposerPackagePath::class);
         $composerPackagePath
+            ->expects($this->once())
             ->method('installPath')
             ->with('johnpbloch/wp-cli-phar')
             ->willReturn('/vendor/wp-cli');
