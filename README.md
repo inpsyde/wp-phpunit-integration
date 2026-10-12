@@ -39,13 +39,13 @@ Keep in mind that the "internal" SQLite Database Integration plugin dependency i
 }
 ```
 
-You will also need WordPress, though it is not a hard requirement to install it via Composer. In most cases, it's the most straightforward approach:
+You will also need WordPress. Installing it via Composer is not a hard requirement, but in most cases it's the most straightforward approach:
 
 ```shell
 composer require --dev roots/wordpress
 ```
 
-You can also specify where you want to install WordPress by adding the following to your `composer.json`:
+Before doing so, you can also specify where to install WordPress by adding the following to your `composer.json`:
 
 ```json
 {
@@ -60,7 +60,7 @@ You can also specify where you want to install WordPress by adding the following
 }
 ```
 
-No fixed location is required, as WP PHPUnit Integration will automatically try to detect the location.
+However, no fixed location is required, as WP PHPUnit Integration will automatically try to detect the location.
 
 ### Setup
 
@@ -133,11 +133,11 @@ If you've followed these steps, you should now be able to run your integration t
 composer run tests:integration:no-cov
 ```
 
-For most cases, this is all you have to do.
+In most cases, this is all you have to do.
 
 #### GitHub Actions
 
-It's also recommended to run the integration tests as part of the CI/CD pipeline. When using GitHub Actions, you can do this by taking advantage of the [Reusable Workflows](https://github.com/inpsyde/reusable-workflows/blob/main/docs/php.md#unit-tests-php). 
+It's also recommended to run the integration tests as part of the CI/CD pipeline. When using GitHub Actions, you can do this by taking advantage of the [Reusable Workflows](https://github.com/inpsyde/reusable-workflows/blob/main/docs/php.md#unit-tests-php).
 
 Create a `/.github/workflows/quality-assurance-php-integration-testing.yml` file with the following content:
 
@@ -181,12 +181,12 @@ Bootstrap::init(
     new BootstrapLifecycle(
         setup: function (): void {
             // Run some setup tasks before the default ones.
-            
+
             WpTestEnv::setup();
         },
         load: function () use ($packagePath): void {
             // Omit the default WpTestEnv::load() to use your own custom logic.
-            
+
             include "{$packagePath}/vendor/roots/wordpress/wp-load.php";
         },
         cleanup: function (): void {
