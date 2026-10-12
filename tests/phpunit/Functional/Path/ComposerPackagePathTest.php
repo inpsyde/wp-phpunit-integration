@@ -35,19 +35,6 @@ final class ComposerPackagePathTest extends FunctionalTestCase
         );
     }
 
-    public static function packagePathProvider(): \Generator
-    {
-        yield [
-            '/vendor/some/package',
-            '/vendor/some/package',
-        ];
-
-        yield [
-            '/vendor/../vendor/some/package',
-            '/vendor/some/package',
-        ];
-    }
-
     public function testThrowsExceptionWhenPackageIsNotInstalled(): void
     {
         $this->expectException(Throwable::class);
@@ -60,5 +47,18 @@ final class ComposerPackagePathTest extends FunctionalTestCase
         ]);
 
         (new ComposerPackagePath())->installPath('some/package');
+    }
+
+    public static function packagePathProvider(): \Generator
+    {
+        yield [
+            '/vendor/some/package',
+            '/vendor/some/package',
+        ];
+
+        yield [
+            '/vendor/../vendor/some/package',
+            '/vendor/some/package',
+        ];
     }
 }
