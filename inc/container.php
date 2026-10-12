@@ -8,6 +8,7 @@ use Syde\WpPhpUnitIntegration\EnvVar;
 use Syde\WpPhpUnitIntegration\Package\PackageComposerJsonReader;
 use Syde\WpPhpUnitIntegration\Package\PackageType;
 use Syde\WpPhpUnitIntegration\Package\PackageTypeDetector;
+use Syde\WpPhpUnitIntegration\Path\ComposerPackagePath;
 use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinderKey;
 use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
@@ -84,6 +85,7 @@ return static function (string $packageRootPath): array {
             $container->get(EnvVar::class),
         ),
         // /src/Path/
+        ComposerPackagePath::class => static fn (): ComposerPackagePath => new ComposerPackagePath(),
         LocalDependencyPathNormalizer::class => static fn (): LocalDependencyPathNormalizer => new LocalDependencyPathNormalizer(),
         PackageRootPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new PackageRootPath(
             $packageRootPath,
