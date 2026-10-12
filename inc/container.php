@@ -12,7 +12,6 @@ use Syde\WpPhpUnitIntegration\Path\ComposerPackagePath;
 use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinderKey;
 use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
-use Syde\WpPhpUnitIntegration\Path\Finder\SqliteDatabaseIntegrationPluginFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\WordPressPathFinder;
 use Syde\WpPhpUnitIntegration\Path\Finder\WpCliPathFinder;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
@@ -63,13 +62,6 @@ return static function (string $packageRootPath): array {
         ),
         // /src/Path/Finder/
         CachedLocalDependencyPathFinderKey::class => static fn (): CachedLocalDependencyPathFinderKey => new CachedLocalDependencyPathFinderKey(),
-        SqliteDatabaseIntegrationPluginFinder::class => static fn (ContainerInterface $container): LocalDependencyPathFinder => new CachedLocalDependencyPathFinder(
-            new SqliteDatabaseIntegrationPluginFinder(
-                $container->get(PackageRootPath::class),
-            ),
-            $container->get(CachedLocalDependencyPathFinderKey::class),
-            $container->get(EnvVar::class),
-        ),
         WordPressPathFinder::class => static fn (ContainerInterface $container): LocalDependencyPathFinder => new CachedLocalDependencyPathFinder(
             new WordPressPathFinder(
                 $container->get(PackageRootPath::class),
@@ -92,7 +84,7 @@ return static function (string $packageRootPath): array {
             $container->get(LocalDependencyPathNormalizer::class),
         ),
         SqliteDatabaseIntegrationPluginPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new SqliteDatabaseIntegrationPluginPath(
-            $container->get(SqliteDatabaseIntegrationPluginFinder::class),
+            $container->get(ComposerPackagePath::class),
             $container->get(LocalDependencyPathNormalizer::class),
         ),
         WordPressPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new WordPressPath(
