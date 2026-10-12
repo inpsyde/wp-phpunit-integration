@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpUnitIntegration\Tests\Functional\Path\Finder;
+namespace Syde\WpPhpUnitIntegration\Tests\Functional\Path;
 
-use Syde\WpPhpUnitIntegration\Path\Finder\WordPressPathFinder;
+use Syde\WpPhpUnitIntegration\Path\WordPressPathFinder;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
 final class WordPressPathFinderTest extends FunctionalTestCase
@@ -22,7 +22,7 @@ final class WordPressPathFinderTest extends FunctionalTestCase
 
         $this->assertSame(
             $this->workspace . '/acme/vendor/roots/wordpress',
-            $autoDiscoveredWordPressPath->find(),
+            $autoDiscoveredWordPressPath->discoveredPath(),
         );
     }
 
@@ -34,6 +34,6 @@ final class WordPressPathFinderTest extends FunctionalTestCase
 
         (new WordPressPathFinder(
             $this->localDependencyPath($this->workspace . '/acme'),
-        ))->find();
+        ))->discoveredPath();
     }
 }

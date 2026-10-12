@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Syde\WpPhpUnitIntegration\Path\Finder;
+namespace Syde\WpPhpUnitIntegration\Path;
 
 use Exception;
-use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-readonly class WordPressPathFinder implements LocalDependencyPathFinder
+readonly class WordPressPathFinder
 {
     public function __construct(private LocalDependencyPath $packageRootPath)
     {
     }
 
-    public function find(): string
+    /**
+     * @throws Exception
+     */
+    public function discoveredPath(): string
     {
         $matches = (new Finder())
             ->ignoreDotFiles(false)
