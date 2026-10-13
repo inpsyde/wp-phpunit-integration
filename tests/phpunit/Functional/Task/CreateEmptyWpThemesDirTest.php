@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
 use Syde\WpPhpUnitIntegration\Task\CreateEmptyWpThemesDir;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
@@ -14,7 +15,10 @@ final class CreateEmptyWpThemesDirTest extends FunctionalTestCase
         $this->filesystem->mkdir($this->workspace . '/wordpress/wp-content');
 
         $task = new CreateEmptyWpThemesDir(
-            $this->localDependencyPath($this->workspace . '/wordpress'),
+            $this->createLocalDependencyPathStub(
+                WordPressPath::class,
+                $this->workspace . '/wordpress',
+            ),
         );
         $task->execute();
 

@@ -8,18 +8,16 @@ use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected function localDependencyPath(string $path): LocalDependencyPath
+    /**
+     * @template T of LocalDependencyPath
+     * @param class-string<T> $class
+     * @return T
+     */
+    protected function createLocalDependencyPathStub(string $class, string $path): LocalDependencyPath
     {
-        return new class ($path) implements LocalDependencyPath {
-            public function __construct(
-                private readonly string $path,
-            ) {
-            }
+        $stub = $this->createStub($class);
+        $stub->method('path')->willReturn($path);
 
-            public function path(): string
-            {
-                return $this->path;
-            }
-        };
+        return $stub;
     }
 }

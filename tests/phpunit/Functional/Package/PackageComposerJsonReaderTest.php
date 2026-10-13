@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Package;
 
 use Syde\WpPhpUnitIntegration\Package\PackageComposerJsonReader;
+use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
 final class PackageComposerJsonReaderTest extends FunctionalTestCase
@@ -14,7 +15,7 @@ final class PackageComposerJsonReaderTest extends FunctionalTestCase
         $this->filesystem->dumpFile($this->workspace . '/acme/composer.json', '{"name":"acme"}');
 
         $packageComposerJsonReader = new PackageComposerJsonReader(
-            $this->localDependencyPath($this->workspace . '/acme'),
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
         );
 
         $this->assertSame(
@@ -28,7 +29,7 @@ final class PackageComposerJsonReaderTest extends FunctionalTestCase
         $this->expectException(\Throwable::class);
 
         (new PackageComposerJsonReader(
-            $this->localDependencyPath($this->workspace . '/acme'),
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
         ))->read();
     }
 }

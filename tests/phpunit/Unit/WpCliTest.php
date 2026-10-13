@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Unit;
 
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
+use Syde\WpPhpUnitIntegration\Path\WpCliPath;
 use Syde\WpPhpUnitIntegration\SymfonyProcessFactory;
 use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
 use Syde\WpPhpUnitIntegration\WpCli;
@@ -81,8 +83,8 @@ final class WpCliTest extends UnitTestCase
     {
         (new WpCli(
             $symfonyProcessFactory,
-            $this->localDependencyPath('/vendor/wordpress/wordpress'),
-            $this->localDependencyPath('/vendor/bin/wp'),
+            $this->createLocalDependencyPathStub(WordPressPath::class, '/vendor/wordpress/wordpress'),
+            $this->createLocalDependencyPathStub(WpCliPath::class, '/vendor/bin/wp'),
         ))->run([
             'core',
             'version',

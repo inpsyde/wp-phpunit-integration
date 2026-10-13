@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
+use Syde\WpPhpUnitIntegration\Path\SqliteDatabaseIntegrationPluginPath;
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
 use Syde\WpPhpUnitIntegration\Task\CreateSqliteDbDropIn;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
@@ -18,8 +20,14 @@ final class CreateSqliteDbDropInTest extends FunctionalTestCase
         );
 
         (new CreateSqliteDbDropIn(
-            $this->localDependencyPath($this->workspace . '/vendor/roots/wordpress'),
-            $this->localDependencyPath($this->workspace . '/wp-content/plugins/sqlite-database-integration'),
+            $this->createLocalDependencyPathStub(
+                WordPressPath::class,
+                $this->workspace . '/vendor/roots/wordpress',
+            ),
+            $this->createLocalDependencyPathStub(
+                SqliteDatabaseIntegrationPluginPath::class,
+                $this->workspace . '/wp-content/plugins/sqlite-database-integration',
+            ),
         ))->execute();
 
         $this->assertFileExists($this->workspace . '/vendor/roots/wordpress/wp-content/db.php');

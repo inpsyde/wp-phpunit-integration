@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
+use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
 use Syde\WpPhpUnitIntegration\Task\UnlinkTestedTheme;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
@@ -16,11 +18,19 @@ final class UnlinkTestedThemeTest extends FunctionalTestCase
         $this->filesystem->mkdir($this->workspace . '/acme/vendor/wordpress/wordpress/wp-content/themes/acme');
 
         (new UnlinkTestedTheme(
-            $this->localDependencyPath($this->workspace . '/acme'),
-            $this->localDependencyPath($this->workspace . '/acme/vendor/wordpress/wordpress'),
+            $this->createLocalDependencyPathStub(
+                PackageRootPath::class,
+                $this->workspace . '/acme',
+            ),
+            $this->createLocalDependencyPathStub(
+                WordPressPath::class,
+                $this->workspace . '/acme/vendor/wordpress/wordpress',
+            ),
         ))->execute();
 
         $this->assertDirectoryExists($this->workspace . '/acme');
-        $this->assertDirectoryDoesNotExist($this->workspace . '/acme/vendor/wordpress/wordpress/wp-content/themes/acme');
+        $this->assertDirectoryDoesNotExist(
+            $this->workspace . '/acme/vendor/wordpress/wordpress/wp-content/themes/acme',
+        );
     }
 }

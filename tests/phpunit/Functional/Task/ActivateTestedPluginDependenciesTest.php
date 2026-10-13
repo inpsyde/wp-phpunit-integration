@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
 use Syde\WpPhpUnitIntegration\Task\ActivateTestedPluginDependencies;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 use Syde\WpPhpUnitIntegration\WpCli;
@@ -31,7 +32,10 @@ final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
             ->willReturn('""');
 
         (new ActivateTestedPluginDependencies(
-            $this->localDependencyPath($this->workspace . '/acme'),
+            $this->createLocalDependencyPathStub(
+                PackageRootPath::class,
+                $this->workspace . '/acme',
+            ),
             $wpCli,
         ))->execute();
     }
@@ -51,7 +55,7 @@ final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
             ->willReturnMap($wpCliArgsReturnMap);
 
         (new ActivateTestedPluginDependencies(
-            $this->localDependencyPath($this->workspace . '/acme'),
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
             $wpCli,
         ))->execute();
     }
