@@ -10,6 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class FunctionalTestCase extends \PHPUnit\Framework\TestCase
 {
     protected Filesystem $filesystem;
+
     protected string $workspace;
 
     protected function setUp(): void
