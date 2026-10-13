@@ -19,15 +19,19 @@ final class CreateSqliteDbDropInTest extends FunctionalTestCase
             '{SQLITE_IMPLEMENTATION_FOLDER_PATH}',
         );
 
+        $wordPressPath = $this->createStub(WordPressPath::class);
+        $wordPressPath
+            ->method('path')
+            ->willReturn($this->workspace . '/vendor/roots/wordpress');
+
+        $sqliteIntegrationPluginPath = $this->createStub(SqliteDatabaseIntegrationPluginPath::class);
+        $sqliteIntegrationPluginPath
+            ->method('path')
+            ->willReturn($this->workspace . '/wp-content/plugins/sqlite-database-integration');
+
         (new CreateSqliteDbDropIn(
-            $this->createLocalDependencyPathStub(
-                WordPressPath::class,
-                $this->workspace . '/vendor/roots/wordpress',
-            ),
-            $this->createLocalDependencyPathStub(
-                SqliteDatabaseIntegrationPluginPath::class,
-                $this->workspace . '/wp-content/plugins/sqlite-database-integration',
-            ),
+            $wordPressPath,
+            $sqliteIntegrationPluginPath,
         ))->execute();
 
         $this->assertFileExists($this->workspace . '/vendor/roots/wordpress/wp-content/db.php');

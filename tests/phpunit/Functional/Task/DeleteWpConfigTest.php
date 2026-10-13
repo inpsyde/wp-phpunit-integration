@@ -14,11 +14,13 @@ final class DeleteWpConfigTest extends FunctionalTestCase
     {
         $this->filesystem->appendToFile($this->workspace . '/wordpress/wp-config.php', '');
 
+        $wordPressPath = $this->createStub(WordPressPath::class);
+        $wordPressPath
+            ->method('path')
+            ->willReturn($this->workspace . '/wordpress');
+
         (new DeleteWpConfig(
-            $this->createLocalDependencyPathStub(
-                WordPressPath::class,
-                $this->workspace . '/wordpress',
-            ),
+            $wordPressPath,
         ))->execute();
 
         $this->assertFileDoesNotExist($this->workspace . '/wordpress/wp-config.php');

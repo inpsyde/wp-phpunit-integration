@@ -50,7 +50,7 @@ final class WpCliTest extends UnitTestCase
             ->willReturnCallback(
                 static function (callable $callback): void {
                     $callback(Process::ERR, 'Something went wrong');
-                }
+                },
             );
 
         $symfonyProcessFactory = $this->createMock(SymfonyProcessFactory::class);
@@ -70,7 +70,7 @@ final class WpCliTest extends UnitTestCase
                     $callback(Process::OUT, 'Some regular output');
 
                     return 0;
-                }
+                },
             );
 
         $symfonyProcessFactory = $this->createMock(SymfonyProcessFactory::class);
@@ -81,10 +81,20 @@ final class WpCliTest extends UnitTestCase
 
     private function runWpCli(SymfonyProcessFactory $symfonyProcessFactory): void
     {
+        $wordPressPath = $this->createStub(WordPressPath::class);
+        $wordPressPath
+            ->method('path')
+            ->willReturn('/vendor/wordpress/wordpress');
+
+        $wpCliPath = $this->createStub(WpCliPath::class);
+        $wpCliPath
+            ->method('path')
+            ->willReturn('/vendor/bin/wp');
+
         (new WpCli(
             $symfonyProcessFactory,
-            $this->createLocalDependencyPathStub(WordPressPath::class, '/vendor/wordpress/wordpress'),
-            $this->createLocalDependencyPathStub(WpCliPath::class, '/vendor/bin/wp'),
+            $wordPressPath,
+            $wpCliPath,
         ))->run([
             'core',
             'version',
