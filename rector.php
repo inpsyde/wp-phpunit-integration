@@ -13,16 +13,17 @@ return RectorConfig::configure()
         __DIR__ . '/src',
         __DIR__ . '/tests',
     ])
-    ->withSets([
-        SetList::DEAD_CODE,
-        SetList::CODE_QUALITY,
-        SetList::CODE_QUALITY,
-        SetList::TYPE_DECLARATION,
-        SetList::INSTANCEOF,
-        SetList::EARLY_RETURN,
-        SetList::RECTOR_PRESET,
-        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-        PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
-    ])->withSkip([
-        DisallowedEmptyRuleFixerRector::class,
-    ]);
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        codingStyle: true,
+        typeDeclarations: true,
+        typeDeclarationDocblocks: true,
+        privatization: true,
+        naming: true,
+        rectorPreset: true,
+        phpunitCodeQuality: true,
+        phpunitNarrowAsserts: true,
+        phpunitMockToStub: true,
+        symfonyCodeQuality: true,
+    );
