@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Syde\WpPhpUnitIntegration\Package;
 
 use Exception;
-use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
 use Symfony\Component\Filesystem\Filesystem;
 
 readonly class PackageComposerJsonReader
 {
-    public function __construct(private LocalDependencyPath $packageRootPath)
+    public function __construct(private PackageRootPath $packageRootPath)
     {
     }
 
