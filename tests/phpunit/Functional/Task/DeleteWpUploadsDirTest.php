@@ -17,13 +17,11 @@ final class DeleteWpUploadsDirTest extends FunctionalTestCase
             '',
         );
 
-        $wordPressPath = $this->createStub(WordPressPath::class);
-        $wordPressPath
-            ->method('path')
-            ->willReturn($this->workspace . '/wordpress');
-
         (new DeleteWpUploadsDir(
-            $wordPressPath,
+            $this->createLocalDependencyPathStub(
+                WordPressPath::class,
+                $this->workspace . '/wordpress',
+            ),
         ))->execute();
 
         $this->assertDirectoryDoesNotExist($this->workspace . '/wordpress/wp-content/uploads');

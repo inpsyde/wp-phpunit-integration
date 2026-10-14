@@ -28,13 +28,11 @@ final class ActivateTestedThemeTest extends FunctionalTestCase
                 ],
             );
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
         (new ActivateTestedTheme(
-            $packageRootPath,
+            $this->createLocalDependencyPathStub(
+                PackageRootPath::class,
+                $this->workspace . '/acme',
+            ),
             $wpCli,
         ))->execute();
     }

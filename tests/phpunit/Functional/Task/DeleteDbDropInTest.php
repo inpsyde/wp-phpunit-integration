@@ -14,13 +14,11 @@ final class DeleteDbDropInTest extends FunctionalTestCase
     {
         $this->filesystem->dumpFile($this->workspace . '/wordpress/wp-content/db.php', '');
 
-        $wordPressPath = $this->createStub(WordPressPath::class);
-        $wordPressPath
-            ->method('path')
-            ->willReturn($this->workspace . '/wordpress');
-
         (new DeleteDbDropIn(
-            $wordPressPath,
+            $this->createLocalDependencyPathStub(
+                WordPressPath::class,
+                $this->workspace . '/wordpress',
+            ),
         ))->execute();
 
         $this->assertFileDoesNotExist($this->workspace . '/wordpress/wp-content/db.php');

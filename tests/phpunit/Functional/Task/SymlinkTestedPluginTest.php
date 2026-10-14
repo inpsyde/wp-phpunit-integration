@@ -17,19 +17,15 @@ final class SymlinkTestedPluginTest extends FunctionalTestCase
         $this->filesystem->dumpFile($this->workspace . '/acme/acme.php', 'Acme Plugin');
         $this->filesystem->mkdir($this->workspace . '/acme/vendor/wordpress/wordpress/wp-content/plugins/');
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
-        $wordPressPath = $this->createStub(WordPressPath::class);
-        $wordPressPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme/vendor/wordpress/wordpress');
-
         (new SymlinkTestedPlugin(
-            $packageRootPath,
-            $wordPressPath,
+            $this->createLocalDependencyPathStub(
+                PackageRootPath::class,
+                $this->workspace . '/acme',
+            ),
+            $this->createLocalDependencyPathStub(
+                WordPressPath::class,
+                $this->workspace . '/acme/vendor/wordpress/wordpress',
+            ),
         ))->execute();
 
         $this->assertDirectoryExists($this->workspace . '/acme/vendor/wordpress/wordpress/wp-content/plugins/acme');

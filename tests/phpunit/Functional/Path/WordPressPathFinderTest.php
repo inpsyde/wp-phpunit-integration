@@ -17,13 +17,11 @@ final class WordPressPathFinderTest extends FunctionalTestCase
             '',
         );
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
         $wordPressPathFinder = new WordPressPathFinder(
-            $packageRootPath,
+            $this->createLocalDependencyPathStub(
+                PackageRootPath::class,
+                $this->workspace . '/acme',
+            ),
         );
 
         $this->assertSame(
@@ -38,13 +36,11 @@ final class WordPressPathFinderTest extends FunctionalTestCase
 
         $this->filesystem->mkdir($this->workspace . '/acme');
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
         (new WordPressPathFinder(
-            $packageRootPath,
+            $this->createLocalDependencyPathStub(
+                PackageRootPath::class,
+                $this->workspace . '/acme',
+            ),
         ))->discoveredPath();
     }
 }
