@@ -14,13 +14,8 @@ final class CreateEmptyWpThemesDirTest extends FunctionalTestCase
     {
         $this->filesystem->mkdir($this->workspace . '/wordpress/wp-content');
 
-        $wordPressPath = $this->createStub(WordPressPath::class);
-        $wordPressPath
-            ->method('path')
-            ->willReturn($this->workspace . '/wordpress');
-
         $createEmptyWpThemesDir = new CreateEmptyWpThemesDir(
-            $wordPressPath,
+            $this->createLocalDependencyPathStub(WordPressPath::class, $this->workspace . '/wordpress'),
         );
         $createEmptyWpThemesDir->execute();
 

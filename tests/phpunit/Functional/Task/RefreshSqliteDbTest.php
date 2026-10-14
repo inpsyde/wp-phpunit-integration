@@ -38,13 +38,8 @@ final class RefreshSqliteDbTest extends FunctionalTestCase
                 ],
             );
 
-        $wordPressPath = $this->createStub(WordPressPath::class);
-        $wordPressPath
-            ->method('path')
-            ->willReturn($this->workspace . '/wordpress');
-
         (new RefreshSqliteDb(
-            $wordPressPath,
+            $this->createLocalDependencyPathStub(WordPressPath::class, $this->workspace . '/wordpress'),
             $phpProcessIdProvider,
             $wpCli,
         ))->execute();
