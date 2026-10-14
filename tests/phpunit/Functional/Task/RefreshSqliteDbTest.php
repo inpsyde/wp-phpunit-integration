@@ -39,10 +39,7 @@ final class RefreshSqliteDbTest extends FunctionalTestCase
             );
 
         (new RefreshSqliteDb(
-            $this->createLocalDependencyPathStub(
-                WordPressPath::class,
-                $this->workspace . '/wordpress',
-            ),
+            $this->createLocalDependencyPathStub(WordPressPath::class, $this->workspace . '/wordpress'),
             $phpProcessIdProvider,
             $wpCli,
         ))->execute();

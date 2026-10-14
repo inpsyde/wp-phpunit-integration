@@ -18,10 +18,7 @@ final class UnlinkTestedThemeTest extends FunctionalTestCase
         $this->filesystem->mkdir($this->workspace . '/acme/vendor/wordpress/wordpress/wp-content/themes/acme');
 
         (new UnlinkTestedTheme(
-            $this->createLocalDependencyPathStub(
-                PackageRootPath::class,
-                $this->workspace . '/acme',
-            ),
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
             $this->createLocalDependencyPathStub(
                 WordPressPath::class,
                 $this->workspace . '/acme/vendor/wordpress/wordpress',

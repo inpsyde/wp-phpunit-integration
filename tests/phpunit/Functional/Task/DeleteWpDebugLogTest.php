@@ -15,10 +15,7 @@ final class DeleteWpDebugLogTest extends FunctionalTestCase
         $this->filesystem->appendToFile($this->workspace . '/wordpress/wp-content/debug.log', '');
 
         (new DeleteWpDebugLog(
-            $this->createLocalDependencyPathStub(
-                WordPressPath::class,
-                $this->workspace . '/wordpress',
-            ),
+            $this->createLocalDependencyPathStub(WordPressPath::class, $this->workspace . '/wordpress'),
         ))->execute();
 
         $this->assertFileDoesNotExist($this->workspace . '/wordpress/wp-content/debug.log');

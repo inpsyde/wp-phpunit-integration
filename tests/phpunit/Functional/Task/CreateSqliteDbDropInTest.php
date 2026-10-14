@@ -20,10 +20,7 @@ final class CreateSqliteDbDropInTest extends FunctionalTestCase
         );
 
         (new CreateSqliteDbDropIn(
-            $this->createLocalDependencyPathStub(
-                WordPressPath::class,
-                $this->workspace . '/vendor/roots/wordpress',
-            ),
+            $this->createLocalDependencyPathStub(WordPressPath::class, $this->workspace . '/vendor/roots/wordpress'),
             $this->createLocalDependencyPathStub(
                 SqliteDatabaseIntegrationPluginPath::class,
                 $this->workspace . '/wp-content/plugins/sqlite-database-integration',

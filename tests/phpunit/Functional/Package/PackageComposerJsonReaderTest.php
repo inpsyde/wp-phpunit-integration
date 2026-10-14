@@ -20,7 +20,7 @@ final class PackageComposerJsonReaderTest extends FunctionalTestCase
 
         $this->assertSame(
             '{"name":"acme"}',
-            $packageComposerJsonReader->read()
+            $packageComposerJsonReader->read(),
         );
     }
 

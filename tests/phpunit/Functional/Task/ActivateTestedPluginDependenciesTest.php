@@ -32,10 +32,7 @@ final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
             ->willReturn('""');
 
         (new ActivateTestedPluginDependencies(
-            $this->createLocalDependencyPathStub(
-                PackageRootPath::class,
-                $this->workspace . '/acme',
-            ),
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
             $wpCli,
         ))->execute();
     }
