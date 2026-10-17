@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Unit;
 
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
+use Syde\WpPhpUnitIntegration\Path\WpCliPath;
 use Syde\WpPhpUnitIntegration\SymfonyProcessFactory;
 use Syde\WpPhpUnitIntegration\Tests\UnitTestCase;
 use Syde\WpPhpUnitIntegration\WpCli;
@@ -48,7 +50,7 @@ final class WpCliTest extends UnitTestCase
             ->willReturnCallback(
                 static function (callable $callback): void {
                     $callback(Process::ERR, 'Something went wrong');
-                }
+                },
             );
 
         $symfonyProcessFactory = $this->createMock(SymfonyProcessFactory::class);
@@ -68,7 +70,7 @@ final class WpCliTest extends UnitTestCase
                     $callback(Process::OUT, 'Some regular output');
 
                     return 0;
-                }
+                },
             );
 
         $symfonyProcessFactory = $this->createMock(SymfonyProcessFactory::class);
@@ -79,10 +81,20 @@ final class WpCliTest extends UnitTestCase
 
     private function runWpCli(SymfonyProcessFactory $symfonyProcessFactory): void
     {
+        $wordPressPath = $this->createStub(WordPressPath::class);
+        $wordPressPath
+            ->method('path')
+            ->willReturn('/vendor/wordpress/wordpress');
+
+        $wpCliPath = $this->createStub(WpCliPath::class);
+        $wpCliPath
+            ->method('path')
+            ->willReturn('/vendor/bin/wp');
+
         (new WpCli(
             $symfonyProcessFactory,
-            $this->localDependencyPath('/vendor/wordpress/wordpress'),
-            $this->localDependencyPath('/vendor/bin/wp'),
+            $wordPressPath,
+            $wpCliPath,
         ))->run([
             'core',
             'version',

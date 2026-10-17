@@ -10,7 +10,7 @@ use Symfony\Component\Finder\SplFileInfo;
 
 readonly class WordPressPathFinder
 {
-    public function __construct(private LocalDependencyPath $packageRootPath)
+    public function __construct(private PackageRootPath $packageRootPath)
     {
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Path;
 
+use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
 use Syde\WpPhpUnitIntegration\Path\WordPressPathFinder;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
@@ -16,8 +17,13 @@ final class WordPressPathFinderTest extends FunctionalTestCase
             '',
         );
 
+        $packageRootPath = $this->createStub(PackageRootPath::class);
+        $packageRootPath
+            ->method('path')
+            ->willReturn($this->workspace . '/acme');
+
         $wordPressPathFinder = new WordPressPathFinder(
-            $this->localDependencyPath($this->workspace . '/acme'),
+            $packageRootPath,
         );
 
         $this->assertSame(
@@ -32,8 +38,13 @@ final class WordPressPathFinderTest extends FunctionalTestCase
 
         $this->filesystem->mkdir($this->workspace . '/acme');
 
+        $packageRootPath = $this->createStub(PackageRootPath::class);
+        $packageRootPath
+            ->method('path')
+            ->willReturn($this->workspace . '/acme');
+
         (new WordPressPathFinder(
-            $this->localDependencyPath($this->workspace . '/acme'),
+            $packageRootPath,
         ))->discoveredPath();
     }
 }

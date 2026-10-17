@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
+use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
 use Syde\WpPhpUnitIntegration\Task\ActivateTestedPlugin;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 use Syde\WpPhpUnitIntegration\WpCli;
@@ -27,9 +28,14 @@ final class ActivateTestedPluginTest extends FunctionalTestCase
                 ],
             );
 
+        $packageRootPath = $this->createStub(PackageRootPath::class);
+        $packageRootPath
+            ->method('path')
+            ->willReturn($this->workspace . '/acme');
+
         (new ActivateTestedPlugin(
-            $this->localDependencyPath($this->workspace . '/acme'),
-            $wpCli
+            $packageRootPath,
+            $wpCli,
         ))->execute();
     }
 }
