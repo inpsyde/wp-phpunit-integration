@@ -8,7 +8,7 @@ use Throwable;
 
 readonly class WordPressPath implements LocalDependencyPath
 {
-    private const PACKAGE_NAME = 'roots/wordpress';
+    private const PACKAGE_NAME = 'roots/wordpress-no-content';
 
     public function __construct(
         private ComposerPackagePath $composerPackagePath,
