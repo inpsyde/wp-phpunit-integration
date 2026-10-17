@@ -8,17 +8,13 @@ use Syde\WpPhpUnitIntegration\EnvVar;
 use Syde\WpPhpUnitIntegration\Package\PackageComposerJsonReader;
 use Syde\WpPhpUnitIntegration\Package\PackageType;
 use Syde\WpPhpUnitIntegration\Package\PackageTypeDetector;
-use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinder;
-use Syde\WpPhpUnitIntegration\Path\Finder\CachedLocalDependencyPathFinderKey;
-use Syde\WpPhpUnitIntegration\Path\Finder\LocalDependencyPathFinder;
-use Syde\WpPhpUnitIntegration\Path\Finder\SqliteDatabaseIntegrationPluginFinder;
-use Syde\WpPhpUnitIntegration\Path\Finder\WordPressPathFinder;
-use Syde\WpPhpUnitIntegration\Path\Finder\WpCliPathFinder;
+use Syde\WpPhpUnitIntegration\Path\ComposerPackagePath;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPathNormalizer;
 use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
 use Syde\WpPhpUnitIntegration\Path\SqliteDatabaseIntegrationPluginPath;
 use Syde\WpPhpUnitIntegration\Path\WordPressPath;
+use Syde\WpPhpUnitIntegration\Path\WordPressPathFinder;
 use Syde\WpPhpUnitIntegration\Path\WpCliPath;
 use Syde\WpPhpUnitIntegration\PhpProcessIdProvider;
 use Syde\WpPhpUnitIntegration\ShutdownFunctionRegisterer;
@@ -60,45 +56,27 @@ return static function (string $packageRootPath): array {
         PackageTypeDetector::class => static fn (ContainerInterface $container): PackageTypeDetector => new PackageTypeDetector(
             $container->get(PackageComposerJsonReader::class),
         ),
-        // /src/Path/Finder/
-        CachedLocalDependencyPathFinderKey::class => static fn (): CachedLocalDependencyPathFinderKey => new CachedLocalDependencyPathFinderKey(),
-        SqliteDatabaseIntegrationPluginFinder::class => static fn (ContainerInterface $container): LocalDependencyPathFinder => new CachedLocalDependencyPathFinder(
-            new SqliteDatabaseIntegrationPluginFinder(
-                $container->get(PackageRootPath::class),
-            ),
-            $container->get(CachedLocalDependencyPathFinderKey::class),
-            $container->get(EnvVar::class),
-        ),
-        WordPressPathFinder::class => static fn (ContainerInterface $container): LocalDependencyPathFinder => new CachedLocalDependencyPathFinder(
-            new WordPressPathFinder(
-                $container->get(PackageRootPath::class),
-            ),
-            $container->get(CachedLocalDependencyPathFinderKey::class),
-            $container->get(EnvVar::class),
-        ),
-        WpCliPathFinder::class => static fn (ContainerInterface $container): LocalDependencyPathFinder => new CachedLocalDependencyPathFinder(
-            new WpCliPathFinder(
-                $container->get(PackageRootPath::class),
-            ),
-            $container->get(CachedLocalDependencyPathFinderKey::class),
-            $container->get(EnvVar::class),
-        ),
         // /src/Path/
+        ComposerPackagePath::class => static fn (): ComposerPackagePath => new ComposerPackagePath(),
         LocalDependencyPathNormalizer::class => static fn (): LocalDependencyPathNormalizer => new LocalDependencyPathNormalizer(),
         PackageRootPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new PackageRootPath(
             $packageRootPath,
             $container->get(LocalDependencyPathNormalizer::class),
         ),
         SqliteDatabaseIntegrationPluginPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new SqliteDatabaseIntegrationPluginPath(
-            $container->get(SqliteDatabaseIntegrationPluginFinder::class),
+            $container->get(ComposerPackagePath::class),
             $container->get(LocalDependencyPathNormalizer::class),
         ),
         WordPressPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new WordPressPath(
+            $container->get(ComposerPackagePath::class),
             $container->get(WordPressPathFinder::class),
             $container->get(LocalDependencyPathNormalizer::class),
         ),
+        WordPressPathFinder::class => static fn (ContainerInterface $container): WordPressPathFinder => new WordPressPathFinder(
+            $container->get(PackageRootPath::class),
+        ),
         WpCliPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new WpCliPath(
-            $container->get(WpCliPathFinder::class),
+            $container->get(ComposerPackagePath::class),
             $container->get(LocalDependencyPathNormalizer::class),
         ),
         // /src/Task/Bundle/
