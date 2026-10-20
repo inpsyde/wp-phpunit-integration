@@ -8,7 +8,8 @@ use Throwable;
 
 readonly class WordPressPath implements LocalDependencyPath
 {
-    private const PACKAGE_NAME = 'roots/wordpress';
+    // The composer.json file requires the roots/wordpress meta-package, which in turn requires the no-content package that contains the WordPress files.
+    private const PACKAGE_NAME = 'roots/wordpress-no-content';
 
     public function __construct(
         private ComposerPackagePath $composerPackagePath,

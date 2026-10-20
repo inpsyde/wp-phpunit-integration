@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Psr\Container\ContainerInterface;
 use Syde\WpPhpUnitIntegration\BuiltInServer;
 use Syde\WpPhpUnitIntegration\EnvVar;
+use Syde\WpPhpUnitIntegration\Filesystem;
 use Syde\WpPhpUnitIntegration\Package\PackageComposerJsonReader;
 use Syde\WpPhpUnitIntegration\Package\PackageType;
 use Syde\WpPhpUnitIntegration\Package\PackageTypeDetector;
@@ -45,6 +46,7 @@ use Syde\WpPhpUnitIntegration\Task\UnlinkTestedPlugin;
 use Syde\WpPhpUnitIntegration\Task\UnlinkTestedTheme;
 use Syde\WpPhpUnitIntegration\TestRunnerProcessTracker;
 use Syde\WpPhpUnitIntegration\WpCli;
+use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
 return static function (string $packageRootPath): array {
     return [
@@ -211,6 +213,11 @@ return static function (string $packageRootPath): array {
             $container->get(WordPressPath::class),
         ),
         EnvVar::class => static fn (): EnvVar => new EnvVar(),
+        Filesystem::class => static fn (ContainerInterface $container): Filesystem => new Filesystem(
+            new SymfonyFilesystem(),
+            $container->get(PackageRootPath::class),
+            $container->get(WordPressPath::class),
+        ),
         PhpProcessIdProvider::class => static fn (): PhpProcessIdProvider => new PhpProcessIdProvider(),
         ShutdownFunctionRegisterer::class => static fn (): ShutdownFunctionRegisterer => new ShutdownFunctionRegisterer(),
         SymfonyProcessFactory::class => static fn (): SymfonyProcessFactory => new SymfonyProcessFactory(),
