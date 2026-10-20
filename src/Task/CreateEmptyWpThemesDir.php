@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Task;
 
-use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
 use Symfony\Component\Filesystem\Filesystem;
 
 readonly class CreateEmptyWpThemesDir implements Task
 {
     public function __construct(
-        private LocalDependencyPath $wordPressPath,
+        private WordPressPath $wordPressPath,
     ) {
     }
 

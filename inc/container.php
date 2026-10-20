@@ -10,7 +10,6 @@ use Syde\WpPhpUnitIntegration\Package\PackageComposerJsonReader;
 use Syde\WpPhpUnitIntegration\Package\PackageType;
 use Syde\WpPhpUnitIntegration\Package\PackageTypeDetector;
 use Syde\WpPhpUnitIntegration\Path\ComposerPackagePath;
-use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
 use Syde\WpPhpUnitIntegration\Path\LocalDependencyPathNormalizer;
 use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
 use Syde\WpPhpUnitIntegration\Path\SqliteDatabaseIntegrationPluginPath;
@@ -61,15 +60,15 @@ return static function (string $packageRootPath): array {
         // /src/Path/
         ComposerPackagePath::class => static fn (): ComposerPackagePath => new ComposerPackagePath(),
         LocalDependencyPathNormalizer::class => static fn (): LocalDependencyPathNormalizer => new LocalDependencyPathNormalizer(),
-        PackageRootPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new PackageRootPath(
+        PackageRootPath::class => static fn (ContainerInterface $container): PackageRootPath => new PackageRootPath(
             $packageRootPath,
             $container->get(LocalDependencyPathNormalizer::class),
         ),
-        SqliteDatabaseIntegrationPluginPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new SqliteDatabaseIntegrationPluginPath(
+        SqliteDatabaseIntegrationPluginPath::class => static fn (ContainerInterface $container): SqliteDatabaseIntegrationPluginPath => new SqliteDatabaseIntegrationPluginPath(
             $container->get(ComposerPackagePath::class),
             $container->get(LocalDependencyPathNormalizer::class),
         ),
-        WordPressPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new WordPressPath(
+        WordPressPath::class => static fn (ContainerInterface $container): WordPressPath => new WordPressPath(
             $container->get(ComposerPackagePath::class),
             $container->get(WordPressPathFinder::class),
             $container->get(LocalDependencyPathNormalizer::class),
@@ -77,7 +76,7 @@ return static function (string $packageRootPath): array {
         WordPressPathFinder::class => static fn (ContainerInterface $container): WordPressPathFinder => new WordPressPathFinder(
             $container->get(PackageRootPath::class),
         ),
-        WpCliPath::class => static fn (ContainerInterface $container): LocalDependencyPath => new WpCliPath(
+        WpCliPath::class => static fn (ContainerInterface $container): WpCliPath => new WpCliPath(
             $container->get(ComposerPackagePath::class),
             $container->get(LocalDependencyPathNormalizer::class),
         ),

@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Task;
 
-use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\Path\SqliteDatabaseIntegrationPluginPath;
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
 use Symfony\Component\Filesystem\Filesystem;
 
 readonly class CreateSqliteDbDropIn implements Task
 {
     public function __construct(
-        private LocalDependencyPath $wordPressPath,
-        private LocalDependencyPath $sqliteIntegrationPluginPath,
+        private WordPressPath $wordPressPath,
+        private SqliteDatabaseIntegrationPluginPath $sqliteIntegrationPluginPath,
     ) {
     }
 
