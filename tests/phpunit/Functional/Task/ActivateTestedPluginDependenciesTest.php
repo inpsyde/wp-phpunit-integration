@@ -31,13 +31,8 @@ final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
             )
             ->willReturn('""');
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
         (new ActivateTestedPluginDependencies(
-            $packageRootPath,
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
             $wpCli,
         ))->execute();
     }
@@ -56,13 +51,8 @@ final class ActivateTestedPluginDependenciesTest extends FunctionalTestCase
             ->method('run')
             ->willReturnMap($wpCliArgsReturnMap);
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
         (new ActivateTestedPluginDependencies(
-            $packageRootPath,
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
             $wpCli,
         ))->execute();
     }

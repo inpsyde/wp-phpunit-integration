@@ -25,7 +25,8 @@ final class PackageRootPathTest extends FunctionalTestCase
         $this->filesystem->mkdir($this->workspace . '/acme');
 
         $localDependencyPathNormalizer = $this->createStub(LocalDependencyPathNormalizer::class);
-        $localDependencyPathNormalizer->method('normalize')
+        $localDependencyPathNormalizer
+            ->method('normalize')
             ->willReturnArgument(0);
 
         $packageRootPath = new PackageRootPath(
@@ -35,7 +36,7 @@ final class PackageRootPathTest extends FunctionalTestCase
 
         $this->assertSame(
             $this->workspace . '/acme',
-            $packageRootPath->path()
+            $packageRootPath->path(),
         );
     }
 }
