@@ -10,6 +10,7 @@ use Syde\WpPhpUnitIntegration\WpCli;
 readonly class MaybeUpgradeCoreWp implements Task
 {
     private const WP_CORE_VERSION_ENV_VAR = 'WP_CORE_VERSION';
+
     private const PREFIX_ENV_VAR = 'WP_PHPUNIT_INTEGRATION_';
 
     public function __construct(
