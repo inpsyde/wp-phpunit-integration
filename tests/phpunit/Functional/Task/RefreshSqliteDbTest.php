@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
 use Syde\WpPhpUnitIntegration\PhpProcessIdProvider;
 use Syde\WpPhpUnitIntegration\Task\RefreshSqliteDb;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
@@ -21,7 +22,8 @@ final class RefreshSqliteDbTest extends FunctionalTestCase
         $phpProcessIdProvider = $this->createMock(PhpProcessIdProvider::class);
         $phpProcessIdProvider
             ->expects($this->once())
-            ->method('currentProcessId')->willReturn(123456);
+            ->method('currentProcessId')
+            ->willReturn(123456);
 
         $wpCli = $this->createMock(WpCli::class);
         $wpCli
@@ -36,8 +38,13 @@ final class RefreshSqliteDbTest extends FunctionalTestCase
                 ],
             );
 
+        $wordPressPath = $this->createStub(WordPressPath::class);
+        $wordPressPath
+            ->method('path')
+            ->willReturn($this->workspace . '/wordpress');
+
         (new RefreshSqliteDb(
-            $this->localDependencyPath($this->workspace . '/wordpress'),
+            $wordPressPath,
             $phpProcessIdProvider,
             $wpCli,
         ))->execute();

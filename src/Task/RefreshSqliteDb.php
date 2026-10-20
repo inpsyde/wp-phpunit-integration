@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Task;
 
-use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
 use Syde\WpPhpUnitIntegration\PhpProcessIdProvider;
 use Syde\WpPhpUnitIntegration\WpCli;
 use Symfony\Component\Filesystem\Filesystem;
@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 readonly class RefreshSqliteDb implements Task
 {
     public function __construct(
-        private LocalDependencyPath $wordPressPath,
+        private WordPressPath $wordPressPath,
         private PhpProcessIdProvider $phpProcessIdProvider,
         private WpCli $wpCli,
     ) {

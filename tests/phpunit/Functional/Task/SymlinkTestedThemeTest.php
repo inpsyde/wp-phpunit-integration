@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration\Tests\Functional\Task;
 
+use Syde\WpPhpUnitIntegration\Path\PackageRootPath;
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
 use Syde\WpPhpUnitIntegration\Task\SymlinkTestedTheme;
 use Syde\WpPhpUnitIntegration\Tests\FunctionalTestCase;
 
@@ -15,9 +17,19 @@ final class SymlinkTestedThemeTest extends FunctionalTestCase
         $this->filesystem->dumpFile($this->workspace . '/acme/style.css', 'Acme Theme');
         $this->filesystem->mkdir($this->workspace . '/acme/vendor/wordpress/wordpress/wp-content/themes/');
 
+        $packageRootPath = $this->createStub(PackageRootPath::class);
+        $packageRootPath
+            ->method('path')
+            ->willReturn($this->workspace . '/acme');
+
+        $wordPressPath = $this->createStub(WordPressPath::class);
+        $wordPressPath
+            ->method('path')
+            ->willReturn($this->workspace . '/acme/vendor/wordpress/wordpress');
+
         (new SymlinkTestedTheme(
-            $this->localDependencyPath($this->workspace . '/acme'),
-            $this->localDependencyPath($this->workspace . '/acme/vendor/wordpress/wordpress'),
+            $packageRootPath,
+            $wordPressPath,
         ))->execute();
 
         $this->assertDirectoryExists($this->workspace . '/acme/vendor/wordpress/wordpress/wp-content/themes/acme');

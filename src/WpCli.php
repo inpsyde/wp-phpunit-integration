@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace Syde\WpPhpUnitIntegration;
 
 use Exception;
-use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
+use Syde\WpPhpUnitIntegration\Path\WpCliPath;
 use Symfony\Component\Process\Process;
 
 readonly class WpCli
 {
     public function __construct(
         private SymfonyProcessFactory $symfonyProcessFactory,
-        private LocalDependencyPath $wordPressPath,
-        private LocalDependencyPath $wpCliPath,
+        private WordPressPath $wordPressPath,
+        private WpCliPath $wpCliPath,
     ) {
     }
 

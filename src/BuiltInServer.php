@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Syde\WpPhpUnitIntegration;
 
-use Syde\WpPhpUnitIntegration\Path\LocalDependencyPath;
+use Syde\WpPhpUnitIntegration\Path\WordPressPath;
 use Symfony\Component\Process\Process;
 
 class BuiltInServer
@@ -13,7 +13,7 @@ class BuiltInServer
 
     public function __construct(
         private readonly SymfonyProcessFactory $symfonyProcessFactory,
-        private readonly LocalDependencyPath $wordPressPath,
+        private readonly WordPressPath $wordPressPath,
     ) {
     }
 

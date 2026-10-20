@@ -7,7 +7,7 @@ namespace Syde\WpPhpUnitIntegration\Tests;
 use ReflectionClass;
 use Symfony\Component\Filesystem\Filesystem;
 
-class FunctionalTestCase extends TestCase
+class FunctionalTestCase extends \PHPUnit\Framework\TestCase
 {
     protected Filesystem $filesystem;
     protected string $workspace;
