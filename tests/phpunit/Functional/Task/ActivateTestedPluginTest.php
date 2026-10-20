@@ -28,13 +28,8 @@ final class ActivateTestedPluginTest extends FunctionalTestCase
                 ],
             );
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
         (new ActivateTestedPlugin(
-            $packageRootPath,
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
             $wpCli,
         ))->execute();
     }

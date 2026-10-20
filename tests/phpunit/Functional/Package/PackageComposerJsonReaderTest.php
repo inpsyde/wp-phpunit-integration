@@ -14,13 +14,8 @@ final class PackageComposerJsonReaderTest extends FunctionalTestCase
     {
         $this->filesystem->dumpFile($this->workspace . '/acme/composer.json', '{"name":"acme"}');
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
         $packageComposerJsonReader = new PackageComposerJsonReader(
-            $packageRootPath,
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
         );
 
         $this->assertSame(
@@ -33,13 +28,8 @@ final class PackageComposerJsonReaderTest extends FunctionalTestCase
     {
         $this->expectException(\Throwable::class);
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
         (new PackageComposerJsonReader(
-            $packageRootPath,
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
         ))->read();
     }
 }

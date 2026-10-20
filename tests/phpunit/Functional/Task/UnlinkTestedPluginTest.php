@@ -17,19 +17,12 @@ final class UnlinkTestedPluginTest extends FunctionalTestCase
         // Should this be a file?
         $this->filesystem->mkdir($this->workspace . '/acme/vendor/wordpress/wordpress/wp-content/plugins/acme');
 
-        $packageRootPath = $this->createStub(PackageRootPath::class);
-        $packageRootPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme');
-
-        $wordPressPath = $this->createStub(WordPressPath::class);
-        $wordPressPath
-            ->method('path')
-            ->willReturn($this->workspace . '/acme/vendor/wordpress/wordpress');
-
         (new UnlinkTestedPlugin(
-            $packageRootPath,
-            $wordPressPath,
+            $this->createLocalDependencyPathStub(PackageRootPath::class, $this->workspace . '/acme'),
+            $this->createLocalDependencyPathStub(
+                WordPressPath::class,
+                $this->workspace . '/acme/vendor/wordpress/wordpress',
+            ),
         ))->execute();
 
         $this->assertDirectoryExists($this->workspace . '/acme');

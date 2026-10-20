@@ -17,13 +17,8 @@ final class DeleteSqliteDatabaseDirTest extends FunctionalTestCase
             '',
         );
 
-        $wordPressPath = $this->createStub(WordPressPath::class);
-        $wordPressPath
-            ->method('path')
-            ->willReturn($this->workspace . '/wordpress');
-
         (new DeleteSqliteDatabaseDir(
-            $wordPressPath,
+            $this->createLocalDependencyPathStub(WordPressPath::class, $this->workspace . '/wordpress'),
         ))->execute();
 
         $this->assertDirectoryDoesNotExist($this->workspace . '/wordpress/wp-content/database');
