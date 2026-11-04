@@ -43,14 +43,12 @@ final class MaybeUpgradeCoreWpTest extends UnitTestCase
             ->expects($this->exactly(2))
             ->method('get')
             ->willReturnCallback(
-                static function (string $key): ?string {
-                    return match ($key) {
-                        'WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION' => null,
-                        'WP_CORE_VERSION' => '3.1',
-                        default => throw new \Exception(
-                            'Unexpected WordPress core version env retrieved.'
-                        ),
-                    };
+                static fn (string $key): ?string => match ($key) {
+                    'WP_PHPUNIT_INTEGRATION_WP_CORE_VERSION' => null,
+                    'WP_CORE_VERSION' => '3.1',
+                    default => throw new \Exception(
+                        'Unexpected WordPress core version env retrieved.'
+                    ),
                 },
             );
 

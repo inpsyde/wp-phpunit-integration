@@ -46,7 +46,7 @@ readonly class ActivateTestedPluginDependencies implements Task
         }
 
         return array_filter(
-            array_map('trim', explode(',', $requiredPluginsField)),
+            array_map(trim(...), explode(',', $requiredPluginsField)),
         );
     }
 }
