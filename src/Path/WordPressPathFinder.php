@@ -20,8 +20,8 @@ readonly class WordPressPathFinder
     public function discoveredPath(): string
     {
         $finder = (new Finder())
-            ->ignoreDotFiles(false)
-            ->ignoreVCS(false)
+            ->ignoreDotFiles(ignoreDotFiles: false)
+            ->ignoreVCS(ignoreVCS: false)
             ->in($this->packageRootPath->path())
             ->files()
             ->name('wp-config-sample.php');

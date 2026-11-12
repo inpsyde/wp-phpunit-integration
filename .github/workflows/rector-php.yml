@@ -1,0 +1,16 @@
+name: 'Rector PHP'
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - '**.php'
+      - 'composer.*'
+jobs:
+  rector-php:
+    uses: inpsyde/reusable-workflows/.github/workflows/rector-php.yml@main
+    secrets:
+      COMPOSER_AUTH_JSON: '${{secrets.PACKAGIST_AUTH_JSON}}'
+    with:
+      PHP_VERSION: '8.2'

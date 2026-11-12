@@ -11,7 +11,7 @@ abstract class TaskBundle implements Task
     /**
      * @var Task[]
      */
-    private array $tasks;
+    private readonly array $tasks;
 
     public function __construct(Task ...$tasks)
     {

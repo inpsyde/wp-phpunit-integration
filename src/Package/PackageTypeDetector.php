@@ -17,7 +17,7 @@ readonly class PackageTypeDetector
      */
     public function determine(): PackageType
     {
-        $composer = json_decode($this->packageComposerJsonReader->read(), true, 512, JSON_THROW_ON_ERROR);
+        $composer = json_decode($this->packageComposerJsonReader->read(), associative: true, flags: JSON_THROW_ON_ERROR);
 
         return PackageType::tryFrom($composer['type'] ?? '') ?? PackageType::Other;
     }
